@@ -16,6 +16,9 @@
     <ClCompile Include="..\Classes\Eevee.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\functions.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Z:\Classes\AppDelegate.h">
@@ -49,6 +52,9 @@
       <Filter>Resources\res</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Eevee.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\functions.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
