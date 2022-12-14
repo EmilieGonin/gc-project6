@@ -810,11 +810,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Eevee.h" />
+    <ClInclude Include="..\Classes\functions.h" />
     <ClInclude Include="Z:\Classes\AppDelegate.h" />
     <ClInclude Include="Z:\Classes\HelloWorldScene.h" />
     <ClInclude Include="Z:\proj.win32\main.h" />
     <ClInclude Include="Z:\proj.win32\resource.h" />
     <ClCompile Include="..\Classes\Eevee.cpp" />
+    <ClCompile Include="..\Classes\functions.cpp" />
     <ClCompile Include="Z:\Classes\AppDelegate.cpp" />
     <ClCompile Include="Z:\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="Z:\proj.win32\main.cpp" />
