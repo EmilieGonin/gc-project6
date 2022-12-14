@@ -24,11 +24,16 @@
 
 #include "HelloWorldScene.h"
 #include <iostream>
+#include "Eevee.h"
+#include "functions.h"
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
 {
-    return HelloWorld::create();
+    Scene* scene = Scene::create();
+    HelloWorld* layer = HelloWorld::create();
+    scene->addChild(layer);
+    return scene;
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -48,14 +53,19 @@ bool HelloWorld::init()
         return false;
     }
 
-    /*SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/character.plist");*/
+
+    auto map = TMXTiledMap::create("Map1.tmx");
+    this->addChild(map, 0, 99);
+
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     /*this->eevee = Sprite::create("1.png");
     this->eevee->setAnchorPoint(Vec2::ZERO);    
     this->eevee->setScale(0.5, 0.5);
-    this->addChild(this->eevee, 0);*/
+
+    this->addChild(this->eevee, 1);
+
     auto label = Label::createWithTTF("eevee chill", "fonts/Marker Felt.ttf", 24);
     // position the label on the center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
@@ -124,8 +134,6 @@ Vector<SpriteFrame*> HelloWorld::getAnimation(const char* format, int count)
     }
 
     void HelloWorld::update(float delta) {
-
-        
 
         auto position = this->eevee->getPosition();
         position.x -= this->pas * delta;
