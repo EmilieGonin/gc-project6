@@ -23,7 +23,9 @@
  ****************************************************************************/
 
 #include "HelloWorldScene.h"
-
+#include <iostream>
+#include "Eevee.h"
+#include "functions.h"
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -51,21 +53,61 @@ bool HelloWorld::init()
     {
         return false;
     }
+    
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/character.plist");
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
- 
+    this->eevee = Sprite::create("1.png");
+    this->eevee->setAnchorPoint(Vec2::ZERO);    
+    this->eevee->setAnchorPoint(Vec2::ZERO);
+    this->eevee->setScale(0.5, 0.5);
+    this->addChild(this->eevee, 0);
+    auto label = Label::createWithTTF("eevee chill", "fonts/Marker Felt.ttf", 24);
+    // position the label on the center of the screen
+    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
+    this->addChild(label, 1);
+
+
+   /* auto edgeBody = PhysicsBody::createEdgeBox(Director::getInstance()->getVisibleSize(), PHYSICSBOD);*/
+    this->scheduleUpdate();
     return true;
-}
+}   
 
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
+Vector<SpriteFrame*> HelloWorld::getAnimation(const char* format, int count)
 {
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
-
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
+    auto spritecache = SpriteFrameCache::getInstance();
+    Vector<SpriteFrame*> animFrames;
+    char str[100];
+    for (int i = 1; i <= count; i++)
+    {
+        sprintf(str, format, i);
+        animFrames.pushBack(spritecache->getSpriteFrameByName(str));
+    }
+    return animFrames;
 }
+
+    void HelloWorld::menuCloseCallback(Ref* pSender)
+    {
+        //Close the cocos2d-x game scene and quit the application
+        Director::getInstance()->end();
+
+        /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
+
+        //EventCustom customEndEvent("game_scene_close_event");
+        //_eventDispatcher->dispatchEvent(&customEndEvent);
+
+
+    }
+
+    void HelloWorld::update(float delta) {
+
+        //Vector<SpriteFrame*> frames = getAnimation("sprites/character/%04d.png", 3);
+        auto position = this->eevee->getPosition();
+        position.x -= this->pas * delta;
+        if (position.x < 0  || position.x > Director::getInstance()->getWinSize().width - (this->eevee->getBoundingBox().size.width))
+        {
+            this->pas = this->pas * -1;
+        }
+        this->eevee->setPosition(position);
+    }
