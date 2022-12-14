@@ -28,6 +28,9 @@ USING_NS_CC;
 
 Scene* HelloWorld::createScene()
 {
+    Scene* scene = Scene::create();
+    HelloWorld* layer = HelloWorld::create();
+    scene->addChild(layer);
     return HelloWorld::create();
 }
 

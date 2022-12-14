@@ -29,6 +29,10 @@
 
 class HelloWorld : public cocos2d::Scene
 {
+private:
+    cocos2d::TMXTiledMap *_tilemap;
+    cocos2d::TMXLayer *_background;
+
 public:
     static cocos2d::Scene* createScene();
 
