@@ -32,8 +32,7 @@ Scene* HelloWorld::createScene()
 {
     Scene* scene = Scene::create();
     HelloWorld* layer = HelloWorld::create();
-    auto map = TMXTiledMap::create("Map1.tmx");
-    scene->addChild(map,0,99);
+    scene->addChild(layer);
     return scene;
 }
 
@@ -53,6 +52,9 @@ bool HelloWorld::init()
     {
         return false;
     }
+
+    auto map = TMXTiledMap::create("Map1.tmx");
+    this->addChild(map, 0, 99);
     
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/character.plist");
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -62,7 +64,8 @@ bool HelloWorld::init()
     this->eevee->setAnchorPoint(Vec2::ZERO);    
     this->eevee->setAnchorPoint(Vec2::ZERO);
     this->eevee->setScale(0.5, 0.5);
-    this->addChild(this->eevee, 0);
+    this->addChild(this->eevee, 1);
+
     auto label = Label::createWithTTF("eevee chill", "fonts/Marker Felt.ttf", 24);
     // position the label on the center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
