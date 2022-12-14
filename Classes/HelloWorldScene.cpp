@@ -60,33 +60,15 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /*this->eevee = Sprite::create("1.png");
-    this->eevee->setAnchorPoint(Vec2::ZERO);    
-    this->eevee->setScale(0.5, 0.5);
-
-    this->addChild(this->eevee, 1);
-
     auto label = Label::createWithTTF("eevee chill", "fonts/Marker Felt.ttf", 24);
     // position the label on the center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
     this->addChild(label, 0);
 
-
-
     // load the Sprite Sheet
     auto spritecache = SpriteFrameCache::getInstance();
     spritecache->addSpriteFramesWithFile("sprites/character.plist");
-   
-   /* auto mysprite = Sprite::createWithSpriteFrameName("0001.png");
-    mysprite->setAnchorPoint(Vec2::ZERO);
-    mysprite->setScale(3, 3);
-    this->addChild(mysprite, 2);*/
 
-
-
-
-
-    
     this->eevee = Sprite::create("sprites/character.png")   ;
     this->eevee->setScale(3, 3);
     this->eevee->setAnchorPoint(Vec2::ZERO);
