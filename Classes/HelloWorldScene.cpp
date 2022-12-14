@@ -24,6 +24,8 @@
 
 #include "HelloWorldScene.h"
 #include <iostream>
+#include "Eevee.h"
+#include "functions.h"
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -96,7 +98,7 @@ Vector<SpriteFrame*> HelloWorld::getAnimation(const char* format, int count)
 
     void HelloWorld::update(float delta) {
 
-        Vector<SpriteFrame*> frames = getAnimation("sprites/character/%04d.png", 3);
+        //Vector<SpriteFrame*> frames = getAnimation("sprites/character/%04d.png", 3);
         auto position = this->eevee->getPosition();
         position.x -= this->pas * delta;
         if (position.x < 0  || position.x > Director::getInstance()->getWinSize().width - (this->eevee->getBoundingBox().size.width))
