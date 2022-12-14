@@ -30,7 +30,11 @@ USING_NS_CC;
 
 Scene* HelloWorld::createScene()
 {
-    return HelloWorld::create();
+    Scene* scene = Scene::create();
+    HelloWorld* layer = HelloWorld::create();
+    auto map = TMXTiledMap::create("Map1.tmx");
+    scene->addChild(map,0,99);
+    return scene;
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -49,7 +53,7 @@ bool HelloWorld::init()
     {
         return false;
     }
-
+    
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/character.plist");
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
