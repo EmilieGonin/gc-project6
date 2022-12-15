@@ -1,6 +1,6 @@
 #include "Eevee.h"
 
 Eevee::Eevee(Vector<SpriteFrame*> sprite) {
-	this->sprite = sprite;
+	_sprite = sprite;
 };
 Eevee::~Eevee() {};

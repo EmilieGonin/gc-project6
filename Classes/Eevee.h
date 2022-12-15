@@ -6,7 +6,7 @@ USING_NS_CC;
 class Eevee
 {
 protected:
-	Vector<SpriteFrame*> sprite;
+	Vector<SpriteFrame*> _sprite;
 public:
 	Eevee(Vector<SpriteFrame*>);
 	~Eevee();
