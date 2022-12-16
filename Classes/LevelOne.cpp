@@ -103,10 +103,21 @@ bool LevelOne::init()
     void LevelOne::MouseUp(Event* event) {
         EventMouse* e = (EventMouse*)event;
         int button = int(e->getMouseButton());
-        cocos2d::log("Mouse button pressed");
-        cocos2d::log(std::to_string(button).c_str());
+        //cocos2d::log("Mouse button pressed");
+        //cocos2d::log(std::to_string(button).c_str());
 
-        auto director = Director::getInstance();
+        Rect eeveeBounds = _eevee->getSprite()->getBoundingBox();
+        Vec2 mousePosition = e->getLocationInView();
+
+        if (eeveeBounds.containsPoint(mousePosition)) {
+            cocos2d::log("eevee touched");
+            if (_eevee->getSkill()) {
+                cocos2d::log("skill selected");
+            }
+        }
+
+        //Change scene
+        /*auto director = Director::getInstance();
         auto scene = LevelOne::createScene();
-        director->replaceScene(scene);
+        director->replaceScene(scene);*/
     }

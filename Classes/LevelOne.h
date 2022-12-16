@@ -42,7 +42,7 @@ private:
     
     Eevee* _eevee;
 
-    int pas = 100;
+    int pas = 50;
 
 };
 
