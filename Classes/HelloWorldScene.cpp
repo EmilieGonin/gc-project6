@@ -31,7 +31,12 @@ USING_NS_CC;
 
 Scene* HelloWorld::createScene()
 {
-    return HelloWorld::create();
+    Scene* scene = Scene::create();
+    HelloWorld* layer = HelloWorld::create();
+    scene->addChild(layer);
+    
+    return scene;
+
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -49,69 +54,44 @@ bool HelloWorld::init()
     if ( !Scene::init() )
     {
         return false;
-    }
+    }                
+
+    this->_eevee = new Eevee;
+
+    auto map = TMXTiledMap::create("Map1.tmx");
+    this->addChild(map, 0, 99);
 
     //MouseEvents
     EventListenerMouse* listener = EventListenerMouse::create();
     listener->onMouseUp = CC_CALLBACK_1(HelloWorld::MouseUp, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/character.plist");
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    this->eevee = Sprite::create("1.png");
-    this->eevee->setAnchorPoint(Vec2::ZERO);    
-    this->eevee->setAnchorPoint(Vec2::ZERO);
-    this->eevee->setScale(0.5, 0.5);
-    this->addChild(this->eevee, 0);
-    auto label = Label::createWithTTF("eevee chill", "fonts/Marker Felt.ttf", 24);
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
+   
+    this->_eevee->move();
+    this->addChild(this->_eevee->getSprite(), 0);
 
-
-   /* auto edgeBody = PhysicsBody::createEdgeBox(Director::getInstance()->getVisibleSize(), PHYSICSBOD);*/
+ 
     this->scheduleUpdate();
     return true;
 }   
 
-Vector<SpriteFrame*> HelloWorld::getAnimation(const char* format, int count)
-{
-    auto spritecache = SpriteFrameCache::getInstance();
-    Vector<SpriteFrame*> animFrames;
-    char str[100];
-    for (int i = 1; i <= count; i++)
-    {
-        sprintf(str, format, i);
-        animFrames.pushBack(spritecache->getSpriteFrameByName(str));
-    }
-    return animFrames;
-}
-
-    void HelloWorld::menuCloseCallback(Ref* pSender)
-    {
-        //Close the cocos2d-x game scene and quit the application
-        Director::getInstance()->end();
-
-        /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-        //EventCustom customEndEvent("game_scene_close_event");
-        //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
-    }
-
     void HelloWorld::update(float delta) {
 
-        //Vector<SpriteFrame*> frames = getAnimation("sprites/character/%04d.png", 3);
-        auto position = this->eevee->getPosition();
+        auto position = _eevee->getSprite()->getPosition();
         position.x -= this->pas * delta;
-        if (position.x < 0  || position.x > Director::getInstance()->getWinSize().width - (this->eevee->getBoundingBox().size.width))
+        if (position.x < this->_eevee->getSprite()->getContentSize().width * 0.5 || position.x > Director::getInstance()->getWinSize().width - (_eevee->getSprite()->getBoundingBox().size.width) + this->_eevee->getSprite()->getContentSize().width * 0.5)
         {
-            this->pas = this->pas * -1;
+                
+            
+            
+            OutputDebugStringA("je collide");
+            _eevee->collide();
+            this->pas *= -1;
         }
-        this->eevee->setPosition(position);
+        _eevee->getSprite()->setPosition(position);
     }
 
     void HelloWorld::MouseUp(Event* event) {
