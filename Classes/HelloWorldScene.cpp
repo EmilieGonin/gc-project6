@@ -66,6 +66,7 @@ bool HelloWorld::init()
    
     this->_eevee->move();
     this->addChild(this->_eevee->getSprite(), 0);
+
  
     this->scheduleUpdate();
     return true;
