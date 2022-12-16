@@ -26,23 +26,22 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-
+#include "Eevee.h"
 class HelloWorld : public cocos2d::Scene
 {
 
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
-    // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
     void update(float) override;
 
 
 private:
-    cocos2d::Vector<cocos2d::SpriteFrame*> getAnimation(const char* format, int count);
-    cocos2d::Sprite* eevee;
+    
+    Eevee* _eevee;
+
     int pas = 100;
 
 };
