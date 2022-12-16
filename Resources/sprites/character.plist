@@ -49,6 +49,51 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{29,30}</string>
+                <key>spriteSourceSize</key>
+                <string>{29,30}</string>
+                <key>textureRect</key>
+                <string>{{87,0},{29,30}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{29,30}</string>
+                <key>spriteSourceSize</key>
+                <string>{29,30}</string>
+                <key>textureRect</key>
+                <string>{{116,0},{29,30}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>0005.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{29,30}</string>
+                <key>spriteSourceSize</key>
+                <string>{29,30}</string>
+                <key>textureRect</key>
+                <string>{{145,0},{29,30}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -61,9 +106,9 @@
             <key>realTextureFileName</key>
             <string>character.png</string>
             <key>size</key>
-            <string>{87,30}</string>
+            <string>{174,30}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:11e7d82fd7d1ec7abdb1ec5da870a39e:cd4df3a508bcc58d3ff65b9ffbc7342f:9d7b98458f0235176999d89cc8ded93d$</string>
+            <string>$TexturePacker:SmartUpdate:778637f78bf90a7fbebff0733d5f3785:464f5fa6dfc30146cbf0700a7a2f1607:9d7b98458f0235176999d89cc8ded93d$</string>
             <key>textureFileName</key>
             <string>character.png</string>
         </dict>
