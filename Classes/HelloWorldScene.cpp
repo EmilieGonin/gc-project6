@@ -24,6 +24,7 @@
 
 #include "HelloWorldScene.h"
 #include <iostream>
+#include <string>
 #include "Eevee.h"
 #include "functions.h"
 USING_NS_CC;
@@ -49,6 +50,11 @@ bool HelloWorld::init()
     {
         return false;
     }
+
+    //MouseEvents
+    EventListenerMouse* listener = EventListenerMouse::create();
+    listener->onMouseUp = CC_CALLBACK_1(HelloWorld::MouseUp, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/character.plist");
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -106,4 +112,10 @@ Vector<SpriteFrame*> HelloWorld::getAnimation(const char* format, int count)
             this->pas = this->pas * -1;
         }
         this->eevee->setPosition(position);
+    }
+
+    void HelloWorld::MouseUp(Event* event) {
+        EventMouse* e = (EventMouse*)event;
+        int button = int(e->getMouseButton());
+        cocos2d::log(std::to_string(button).c_str());
     }

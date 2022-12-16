@@ -38,10 +38,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
     void update(float) override;
-
-    //MouseEvent
-    MouseEvent* _event;
-
+    void HelloWorld::MouseUp(Event* event);
 
 private:
     cocos2d::Vector<cocos2d::SpriteFrame*> getAnimation(const char* format, int count);
