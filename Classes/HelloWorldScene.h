@@ -36,7 +36,7 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
     CREATE_FUNC(HelloWorld);
     void update(float) override;
-
+    void MouseUp(cocos2d::Event* event);
 
 private:
     

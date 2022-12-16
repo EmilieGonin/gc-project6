@@ -13,7 +13,7 @@ protected:
 	Animate* _animate;
 
 	int _direction;
-	
+
 public:
 	Eevee();
 	~Eevee();

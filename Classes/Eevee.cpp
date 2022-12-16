@@ -19,11 +19,6 @@ Eevee::Eevee() {
     this->_frames = getAnimation("%04d.png", 3);
     this->_animation = Animation::createWithSpriteFrames(this->_frames, 0.2f);
     this->_animate = Animate::create(this->_animation);
-
-
-   
-
-
 };
 Eevee::~Eevee() {};
 
