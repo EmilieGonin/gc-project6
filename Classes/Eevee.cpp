@@ -58,6 +58,8 @@ void Eevee::setDirectionSprite() {
 void Eevee::collide() {
     if(this->_sprite->getScaleX() == 2)
     {
+
+        OutputDebugStringA(std::to_string(this->_direction).c_str());
         this->_sprite->setScaleX(-2);
     }
     else

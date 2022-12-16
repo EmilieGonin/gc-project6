@@ -57,8 +57,14 @@ bool HelloWorld::init()
 
     this->_eevee = new Eevee;
 
+
     auto map = TMXTiledMap::create("Map1.tmx");
     this->addChild(map, 0, 99);
+
+    Sprite* menu = Sprite::create("interface/interface.png");
+    menu->setScale(1,1);
+    menu->setAnchorPoint(Vec2::ZERO);
+    menu->setPosition(0, 0);
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -66,10 +72,11 @@ bool HelloWorld::init()
    
     this->_eevee->move();
     this->addChild(this->_eevee->getSprite(), 0);
+    this->addChild(menu, 0);
 
  
     this->scheduleUpdate();
-    return true;
+    return true;    
 }   
 
     void HelloWorld::update(float delta) {
@@ -78,9 +85,6 @@ bool HelloWorld::init()
         position.x -= this->pas * delta;
         if (position.x < this->_eevee->getSprite()->getContentSize().width * 0.5 || position.x > Director::getInstance()->getWinSize().width - (_eevee->getSprite()->getBoundingBox().size.width) + this->_eevee->getSprite()->getContentSize().width * 0.5)
         {
-                
-            
-            
             OutputDebugStringA("je collide");
             _eevee->collide();
             this->pas *= -1;
