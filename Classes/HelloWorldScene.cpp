@@ -105,4 +105,8 @@ bool HelloWorld::init()
         int button = int(e->getMouseButton());
         cocos2d::log("Mouse button pressed");
         cocos2d::log(std::to_string(button).c_str());
+
+        auto director = Director::getInstance();
+        auto scene = HelloWorld::createScene();
+        director->replaceScene(scene);
     }
