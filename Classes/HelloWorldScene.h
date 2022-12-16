@@ -26,7 +26,6 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-#include "MouseEvent.h"
 
 class HelloWorld : public cocos2d::Scene
 {
@@ -38,7 +37,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
     void update(float) override;
-    void HelloWorld::MouseUp(Event* event);
+    void MouseUp(cocos2d::Event* event);
 
 private:
     cocos2d::Vector<cocos2d::SpriteFrame*> getAnimation(const char* format, int count);

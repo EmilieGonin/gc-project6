@@ -117,5 +117,6 @@ Vector<SpriteFrame*> HelloWorld::getAnimation(const char* format, int count)
     void HelloWorld::MouseUp(Event* event) {
         EventMouse* e = (EventMouse*)event;
         int button = int(e->getMouseButton());
+        cocos2d::log("Mouse button pressed");
         cocos2d::log(std::to_string(button).c_str());
     }
