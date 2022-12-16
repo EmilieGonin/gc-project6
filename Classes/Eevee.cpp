@@ -19,6 +19,7 @@ Eevee::Eevee() {
     this->_frames = getAnimation("%04d.png", 3);
     this->_animation = Animation::createWithSpriteFrames(this->_frames, 0.2f);
     this->_animate = Animate::create(this->_animation);
+    _skill = 0;
 };
 Eevee::~Eevee() {};
 
@@ -64,5 +65,6 @@ void Eevee::collide() {
 
 }
 
-Sprite* Eevee::getSprite() { return this->_sprite; }
-Animate* Eevee::getAnimate() { return this->_animate; }
+Sprite* Eevee::getSprite() { return _sprite; }
+Animate* Eevee::getAnimate() { return _animate; }
+int Eevee::getSkill() { return _skill; };

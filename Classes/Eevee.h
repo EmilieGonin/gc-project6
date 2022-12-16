@@ -12,7 +12,7 @@ protected:
 	Animation* _animation;
 	Animate* _animate;
 
-	int _direction;
+	int _direction, _skill;
 
 public:
 	Eevee();
@@ -24,6 +24,14 @@ public:
 
 	Sprite* getSprite();
 	Animate* getAnimate();
-		
 
+	enum class Skill {
+		NONE = 0,
+		FLAREON = 1,
+		JOLTEON = 2,
+		VAPOREON = 3
+	};
+
+	//Getters
+	int getSkill();
 };
