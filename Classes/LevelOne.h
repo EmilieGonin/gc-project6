@@ -22,19 +22,19 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __LevelOne_SCENE_H__
+#define __LevelOne_SCENE_H__
 
 #include "cocos2d.h"
 #include "Eevee.h"
-class HelloWorld : public cocos2d::Scene
+class LevelOne : public cocos2d::Scene
 {
 
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
     void menuCloseCallback(cocos2d::Ref* pSender);
-    CREATE_FUNC(HelloWorld);
+    CREATE_FUNC(LevelOne);
     void update(float) override;
     void MouseUp(cocos2d::Event* event);
 
@@ -46,4 +46,4 @@ private:
 
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __LevelOne_SCENE_H__

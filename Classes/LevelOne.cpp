@@ -22,17 +22,17 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "HelloWorldScene.h"
+#include "LevelOne.h"
 #include <iostream>
 #include <string>
 #include "Eevee.h"
 #include "functions.h"
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* LevelOne::createScene()
 {
     Scene* scene = Scene::create();
-    HelloWorld* layer = HelloWorld::create();
+    LevelOne* layer = LevelOne::create();
     scene->addChild(layer);
     
     return scene;
@@ -43,11 +43,11 @@ Scene* HelloWorld::createScene()
 static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
-    printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
+    printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in LevelOneScene.cpp\n");
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool LevelOne::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -70,7 +70,7 @@ bool HelloWorld::init()
 
     //MouseEvents
     EventListenerMouse* listener = EventListenerMouse::create();
-    listener->onMouseUp = CC_CALLBACK_1(HelloWorld::MouseUp, this);
+    listener->onMouseUp = CC_CALLBACK_1(LevelOne::MouseUp, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 
@@ -87,7 +87,7 @@ bool HelloWorld::init()
     return true;    
 }   
 
-    void HelloWorld::update(float delta) {
+    void LevelOne::update(float delta) {
 
         auto position = _eevee->getSprite()->getPosition();
         position.x -= this->pas * delta;
@@ -100,13 +100,13 @@ bool HelloWorld::init()
         _eevee->getSprite()->setPosition(position);
     }
 
-    void HelloWorld::MouseUp(Event* event) {
+    void LevelOne::MouseUp(Event* event) {
         EventMouse* e = (EventMouse*)event;
         int button = int(e->getMouseButton());
         cocos2d::log("Mouse button pressed");
         cocos2d::log(std::to_string(button).c_str());
 
         auto director = Director::getInstance();
-        auto scene = HelloWorld::createScene();
+        auto scene = LevelOne::createScene();
         director->replaceScene(scene);
     }
