@@ -30,8 +30,6 @@ bool LevelOne::init()
         return false;
     }                
 
-    this->_eevee = new Eevee;
-
 
     auto map = TMXTiledMap::create("Map1.tmx");
     this->addChild(map, 0, 99);
@@ -51,41 +49,51 @@ bool LevelOne::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
- 
-    this->_eevee->move();
-    this->addChild(this->_eevee->getSprite(), 0);
-    this->addChild(menu, 0);
-
+    spawnEevee();
     this->scheduleUpdate();
 
     return true;    
-}   
+}
+
+void LevelOne::spawnEevee() {
+    Sprite* eeveeSprite = nullptr;
+    for (size_t i = 0; i < 3; i++)
+    {
+        cocos2d::log("eevee created");
+        eeveeSprite = Sprite::create("sprites/character.png");
+        eeveeSprite->setScale(2, 2);
+        eeveeSprite->setPosition(100, 100);
+        Vec2 myAnchorPoint(0.5, 0.5);
+        eeveeSprite->setAnchorPoint(myAnchorPoint);
+
+        Eevee* eevee = new Eevee(eeveeSprite, i + 1);
+        this->_eevings.push_back(eevee);
+
+        this->addChild(eeveeSprite);
+        eevee->move();
+    }
+}
 
 void LevelOne::update(float delta) {
-
-    auto position = _eevee->getSprite()->getPosition();
-    position.x -= this->pas * delta;
-    if (position.x < this->_eevee->getSprite()->getContentSize().width * 0.5 || position.x > Director::getInstance()->getWinSize().width - (_eevee->getSprite()->getBoundingBox().size.width) + this->_eevee->getSprite()->getContentSize().width * 0.5)
+    for (size_t i = 0; i < this->_eevings.size(); i++)
     {
-        OutputDebugStringA("je collide");
-        _eevee->collide();
-        this->pas *= -1;
+        Eevee* eevee = this->_eevings[i];
+        eevee->update(delta);
     }
-    _eevee->getSprite()->setPosition(position);
 }
 
 void LevelOne::MouseUp(Event* event) {
     EventMouse* e = (EventMouse*)event;
     int button = int(e->getMouseButton());
-
-
-    Rect eeveeBounds = _eevee->getSprite()->getBoundingBox();
     Vec2 mousePosition = e->getLocationInView();
 
-    if (eeveeBounds.containsPoint(mousePosition)) {
-        cocos2d::log("eevee touched");
-        if (_eevee->getSkill()) {
-            cocos2d::log("skill selected");
+    for (size_t i = 0; i < this->_eevings.size(); i++)
+    {
+        Rect eeveeBounds = _eevings[i]->getSprite()->getBoundingBox();
+
+        if (eeveeBounds.containsPoint(mousePosition)) {
+            cocos2d::log("eevee touched :");
+            cocos2d::log(std::to_string(this->_eevings[i]->getId()).c_str());
         }
     }
 }

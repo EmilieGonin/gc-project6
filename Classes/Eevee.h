@@ -12,15 +12,16 @@ protected:
 	Animation* _animation;
 	Animate* _animate;
 
-	int _direction, _skill;
+	int _direction, _skill, _id, _pas;
 
 public:
-	Eevee();
+	Eevee(Sprite*, int);
 	~Eevee();
 	Vector<SpriteFrame*> getAnimation(const char* format, int count);
 	void move();
 	void setDirectionSprite();
 	void collide();
+	void update(float);
 
 	Sprite* getSprite();
 	Animate* getAnimate();
@@ -34,4 +35,5 @@ public:
 
 	//Getters
 	int getSkill();
+	int getId();
 };
