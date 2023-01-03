@@ -15,6 +15,9 @@ public:
     void MouseUp(cocos2d::Event* event);
 
 protected:
+    TMXTiledMap* _tilemap;
+    TMXLayer* _background;
+    TMXLayer* _collision;
     Eevee* _eevee;
     //Sprite* _menuScreen;
     int pas = 50;

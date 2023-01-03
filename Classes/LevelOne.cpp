@@ -33,9 +33,16 @@ bool LevelOne::init()
     this->_eevee = new Eevee;
 
 
-    auto map = TMXTiledMap::create("Map1.tmx");
-    this->addChild(map, 0, 99);
+    /*auto map = TMXTiledMap::create("Map1.tmx");
+    this->addChild(map, 0, 99);*/
 
+    _tilemap = new TMXTiledMap();
+    _tilemap->initWithTMXFile("Map1.tmx");
+    _background=_tilemap->getLayer("background");
+    _collision = _tilemap->getLayer("collision");
+    /*_collision->setVisible(false);*/
+
+    this->addChild(_tilemap);
 
     Sprite* menu = Sprite::create("interface/interface.png");
     menu->setScale(1,1);
