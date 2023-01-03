@@ -2,10 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\egonin\Desktop\Projet-6\gc-project6\gc-project6\Debug\ZERO_CHECK</FullPath>
-    </ProjectOutput>
-    <ProjectOutput>
-      <FullPath>C:\Users\egonin\Source\Repos\gc-project6\gc-project6\Debug\ZERO_CHECK</FullPath>
+      <FullPath>C:\Users\egonin\source\repos\gc-project6\gc-project6\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
