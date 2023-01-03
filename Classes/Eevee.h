@@ -1,9 +1,10 @@
 #pragma once
 
 #include "cocos2d.h"
+
 USING_NS_CC;
 
-class Eevee
+class Eevee : public Sprite
 {
 protected:
 	Vector<SpriteFrame*> _frames;

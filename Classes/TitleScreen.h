@@ -15,7 +15,8 @@ public:
     void MouseUp(cocos2d::Event* event);
 
 protected:
-    
+    Label* start;
+    Label* quit;
     Sprite* _menuScreen;
     int pas = 50;
 };

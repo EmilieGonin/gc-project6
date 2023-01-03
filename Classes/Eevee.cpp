@@ -7,8 +7,8 @@ Eevee::Eevee() {
 
     SpriteFrameCache* spritecache = SpriteFrameCache::getInstance();
     spritecache->addSpriteFramesWithFile("sprites/character.plist");
-
-    this->_sprite = Sprite::create("sprites/character.png");
+    
+    this->_sprite = Sprite::create("sprites/0000.png");
     this->_sprite->setScale(2, 2);
     this->_sprite->setPosition(100, 100);
     Vec2 myAnchorPoint(0.5, 0.5);

@@ -15,6 +15,8 @@ public:
     void MouseUp(cocos2d::Event* event);
 
 protected:
+    void setPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; }
+    cocos2d::PhysicsWorld* sceneWorld;
     Eevee* _eevee;
     //Sprite* _menuScreen;
     int pas = 50;
