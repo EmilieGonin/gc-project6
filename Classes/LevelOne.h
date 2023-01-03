@@ -1,6 +1,9 @@
 
 #pragma once
 
+#include <iostream>
+#include <vector>
+
 #include "cocos2d.h"
 #include "Eevee.h"
 
@@ -13,11 +16,12 @@ public:
     CREATE_FUNC(LevelOne);
     void update(float) override;
     void MouseUp(cocos2d::Event* event);
+    void spawnEevee();
 
 protected:
+    std::vector<Eevee*> _eevings;
     void setPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; }
     cocos2d::PhysicsWorld* sceneWorld;
-    Eevee* _eevee;
     //Sprite* _menuScreen;
     int pas = 50;
 };
