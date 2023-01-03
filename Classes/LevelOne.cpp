@@ -5,10 +5,17 @@ USING_NS_CC;
 
 
 Scene* LevelOne::createScene() {
-    Scene* scene = Scene::create();
-    LevelOne* layer = LevelOne::create();
+    // 'scene' is an autorelease object
+    auto scene = Scene::createWithPhysics();
+    scene->getPhysicsWorld()->setGravity(Vect(0, -200));
+
+    // 'layer' is an autorelease object
+    auto layer = LevelOne::create();
+    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    // add layer as a child to scene
     scene->addChild(layer);
 
+    // return the scene
     return scene;
 
 }
@@ -44,11 +51,7 @@ bool LevelOne::init()
     EventListenerMouse* listener = EventListenerMouse::create();
     listener->onMouseUp = CC_CALLBACK_1(LevelOne::MouseUp, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    
     spawnEevee();
     this->scheduleUpdate();
 
@@ -56,19 +59,32 @@ bool LevelOne::init()
 }
 
 void LevelOne::spawnEevee() {
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto edgebody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(0.0f, 0.2f, 0.1f), 3);
+    auto edgenode = Node::create();
+    edgenode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+    edgenode->setPhysicsBody(edgebody);
+    this->addChild(edgenode);
+        
     Sprite* eeveeSprite = nullptr;
     for (size_t i = 0; i < 3; i++)
     {
         cocos2d::log("eevee created");
-        eeveeSprite = Sprite::create("sprites/character.png");
+        eeveeSprite = Sprite::create("sprites/0000.png");
         eeveeSprite->setScale(2, 2);
         eeveeSprite->setPosition(100, 100);
         Vec2 myAnchorPoint(0.5, 0.5);
         eeveeSprite->setAnchorPoint(myAnchorPoint);
+        
+        PhysicsBody* physicsBody = PhysicsBody::createCircle(eeveeSprite->getContentSize().height / 2);
+        physicsBody->setDynamic(true);
+        physicsBody->setGravityEnable(true);
 
         Eevee* eevee = new Eevee(eeveeSprite, i + 1);
         this->_eevings.push_back(eevee);
 
+        eeveeSprite->addComponent(physicsBody);
         this->addChild(eeveeSprite);
         eevee->move();
     }
