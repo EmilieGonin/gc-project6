@@ -19,6 +19,9 @@
     <ClCompile Include="..\Classes\LevelOne.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Level.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Z:\Classes\AppDelegate.h">
@@ -55,6 +58,9 @@
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LevelOne.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Level.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,28 +22,14 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __LevelOne_SCENE_H__
-#define __LevelOne_SCENE_H__
+#pragma once
 
 #include "cocos2d.h"
-#include "Eevee.h"
-class LevelOne : public cocos2d::Scene
+#include "Level.h"
+
+class LevelOne : public Level
 {
-
 public:
-    static cocos2d::Scene* createScene();
     virtual bool init();
-    void menuCloseCallback(cocos2d::Ref* pSender);
     CREATE_FUNC(LevelOne);
-    void update(float) override;
-    void MouseUp(cocos2d::Event* event);
-
-private:
-    
-    Eevee* _eevee;
-
-    int pas = 50;
-
 };
-
-#endif // __LevelOne_SCENE_H__

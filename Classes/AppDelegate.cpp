@@ -23,7 +23,7 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
-#include "LevelOne.h"
+#include "Level.h"
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -110,7 +110,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
     // create a scene. it's an autorelease object
-    auto scene = LevelOne::createScene();
+    auto scene = Level::createScene();
     cocos2d::log("scene loaded");
 
     // run
