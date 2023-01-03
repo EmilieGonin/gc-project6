@@ -19,7 +19,7 @@
     <ClCompile Include="..\Classes\LevelOne.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Level.cpp">
+    <ClCompile Include="..\Classes\TitleScreen.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,7 +60,7 @@
     <ClInclude Include="..\Classes\LevelOne.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Level.h">
+    <ClInclude Include="..\Classes\TitleScreen.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
