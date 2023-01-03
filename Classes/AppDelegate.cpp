@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "Level.h"
+#include "TitleScreen.h"
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -86,7 +86,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
     // create a scene. it's an autorelease object
-    auto scene = Level::createScene();
+    auto scene = TitleScreen::createScene();
     cocos2d::log("scene loaded");
 
     // run

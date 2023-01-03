@@ -10,7 +10,7 @@ Eevee::Eevee() {
 
     this->_sprite = Sprite::create("sprites/character.png");
     this->_sprite->setScale(2, 2);
-    this->_sprite->setPosition(20, 20);
+    this->_sprite->setPosition(100, 100);
     Vec2 myAnchorPoint(0.5, 0.5);
     this->_sprite->setAnchorPoint(myAnchorPoint);
 
@@ -52,6 +52,7 @@ void Eevee::setDirectionSprite() {
  }
 
 void Eevee::collide() {
+
     if(this->_sprite->getScaleX() == 2)
     {
 
@@ -65,6 +66,6 @@ void Eevee::collide() {
 
 }
 
-Sprite* Eevee::getSprite() { return _sprite; }
+Sprite* Eevee::getSprite() { return this->_sprite; }
 Animate* Eevee::getAnimate() { return _animate; }
 int Eevee::getSkill() { return _skill; };

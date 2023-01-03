@@ -5,17 +5,17 @@
 #include "cocos2d.h"
 #include "Eevee.h"
 
-class Level : public cocos2d::Scene
+class TitleScreen : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
-    //void menuCloseCallback(cocos2d::Ref* pSender);
-    CREATE_FUNC(Level);
-    void update(float) override;
+    CREATE_FUNC(TitleScreen);
+   
     void MouseUp(cocos2d::Event* event);
 
 protected:
-    Eevee* _eevee;
+    
+    Sprite* _menuScreen;
     int pas = 50;
 };
