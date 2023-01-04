@@ -29,6 +29,8 @@ bool LevelOne::init()
 
 
     auto _tilemap = TMXTiledMap::create("Map1.tmx");
+    _background = _tilemap->getLayer("background");
+    _background->setVisible(true);
     this->addChild(_tilemap);
 
     /*_tilemap = new TMXTiledMap();
@@ -40,24 +42,27 @@ bool LevelOne::init()
     
     this->addChild(_tilemap);*/
 
-    /*TMXObjectGroup* collisions = _tilemap->getObjectGroup("collision");
-    ValueVector& rectangle_array = collisions->getObjects();
-    for (cocos2d::Value& rectangle_box : rectangle_array) {
-        cocos2d::ValueMap rectangle_box_properties = rectangle_box.asValueMap();
+    //TMXObjectGroup* collisions_SOL = _tilemap->getObjectGroup("collision_SOL");
+    //ValueVector& rectangle_array = collisions_SOL->getObjects();
+    //for (cocos2d::Value& rectangle_box : rectangle_array) {
+    //    cocos2d::ValueMap rectangle_box_properties = rectangle_box.asValueMap();
 
-        Node* node = Node::create();
-        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        node->setPhysicsBody(box);
+    //    Node* node = Node::create();
+    //    PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+    //    box->setCollisionBitmask(3);
+    //    box->setContactTestBitmask(true);
 
-        box->setGroup(-1);
-        box->setContactTestBitmask(1);
+    //    node->setPhysicsBody(box);
 
-        node->setPosition(Vec2(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / rectangle_box_properties["height"].asInt(), rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / rectangle_box_properties["width"].asInt()));
-        box->setGravityEnable(false);
-        box->setDynamic(false);
+    //    //box->setGroup(-1);
+    //   
 
-        this->addChild(node, 20);
-    }*/
+    //    node->setPosition(Vec2(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / rectangle_box_properties["height"].asInt() *14, rectangle_box_properties["y"].asInt() + rectangle_box_properties["width"].asInt() / rectangle_box_properties["height"].asInt() ));
+    //    box->setGravityEnable(false);
+    //    box->setDynamic(false);
+
+    //    this->addChild(node, 20);
+    //}
 
     spawnEevee();
 
