@@ -1,8 +1,6 @@
 #include "Eevee.h"
 #include <iostream>
 Eevee::Eevee(Sprite* sprite, int id) {
-	
-
     // 0 - 3 going left 4 - 6 going right
 
     SpriteFrameCache* spritecache = SpriteFrameCache::getInstance();
@@ -51,6 +49,18 @@ void Eevee::update(float delta) {
     Vec2 position = _sprite->getPosition();
     position.x -= _pas * delta;
     _sprite->setPosition(position);
+}
+
+bool Eevee::isTouched(Vec2 position) {
+    Rect eeveeBounds = _sprite->getBoundingBox();
+
+    if (eeveeBounds.containsPoint(position)) {
+        cocos2d::log(("eevee touched : " + std::to_string(_id)).c_str());
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void Eevee::collide() {

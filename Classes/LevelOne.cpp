@@ -2,22 +2,12 @@
 #include "functions.h"
 USING_NS_CC;
 
-
-
 Scene* LevelOne::createScene() {
-    // 'scene' is an autorelease object
-    auto scene = Scene::createWithPhysics();
+    Scene* scene = LevelOne::createWithPhysics();
+    scene = LevelOne::create();
     scene->getPhysicsWorld()->setGravity(Vect(0, -200));
-
-    // 'layer' is an autorelease object
-    auto layer = LevelOne::create();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-    // add layer as a child to scene
-    scene->addChild(layer);
-
-    // return the scene
     return scene;
-
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -32,7 +22,7 @@ bool LevelOne::init()
 {
     //////////////////////////////
     // 1. super init first
-    if ( !Scene::init() )
+    if ( !Scene::initWithPhysics() )
     {
         return false;
     }                
@@ -119,6 +109,7 @@ void LevelOne::spawnEevee() {
     
 }
 
+
 void LevelOne::update(float delta) {
     for (size_t i = 0; i < this->_eevings.size(); i++)
     {
@@ -153,6 +144,7 @@ bool LevelOne::onContactSeparate(PhysicsContact& contact) {
     return true;
 }
 
+
 void LevelOne::MouseUp(Event* event) {
     EventMouse* e = (EventMouse*)event;
     int button = int(e->getMouseButton());
@@ -160,11 +152,11 @@ void LevelOne::MouseUp(Event* event) {
 
     for (size_t i = 0; i < this->_eevings.size(); i++)
     {
-        Rect eeveeBounds = _eevings[i]->getSprite()->getBoundingBox();
 
-        if (eeveeBounds.containsPoint(mousePosition)) {
-            cocos2d::log("eevee touched :");
-            //cocos2d::log(std::to_string(this->_eevings[i]->getId()).c_str());
+        Eevee* eevee = this->_eevings[i];
+        if (eevee->isTouched(mousePosition)) {
+            //
+
         }
     }
 }
