@@ -1,7 +1,6 @@
 
 #pragma once
 #include "Level.h"
-
 class LevelOne : public Level
 {
 public:
@@ -19,6 +18,9 @@ public:
     void MouseUp(cocos2d::Event* event);
 
 protected:
+    TMXTiledMap* _tilemap;
+    TMXLayer* _background;
+    TMXObjectGroup* _collision;
     void setPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; }
     cocos2d::PhysicsWorld* sceneWorld;
     //Sprite* _menuScreen;
