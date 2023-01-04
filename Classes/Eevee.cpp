@@ -53,13 +53,24 @@ void Eevee::update(float delta) {
 
     if (position.x < _sprite->getContentSize().width * 0.5 || position.x > Director::getInstance()->getWinSize().width - (_sprite->getBoundingBox().size.width) + _sprite->getContentSize().width * 0.5)
     {
-        cocos2d::log("eevee collide :");
-        cocos2d::log(std::to_string(_id).c_str());
+        cocos2d::log(("eevee collided :" + std::to_string(_id)).c_str());
         this->collide();
         _pas *= -1;
     }
 
     _sprite->setPosition(position);
+}
+
+bool Eevee::isTouched(Vec2 position) {
+    Rect eeveeBounds = _sprite->getBoundingBox();
+
+    if (eeveeBounds.containsPoint(position)) {
+        cocos2d::log(("eevee touched : " + std::to_string(_id)).c_str());
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void Eevee::collide() {

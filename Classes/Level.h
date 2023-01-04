@@ -1,0 +1,17 @@
+#pragma once
+
+#include <iostream>
+#include <vector>
+
+#include "cocos2d.h"
+#include "Eevee.h"
+
+class Level : public cocos2d::Scene
+{
+public:
+	void update(float) override;
+
+protected:
+	std::vector<Eevee*> _eevings;
+};
+

@@ -23,6 +23,7 @@ public:
 	void setDirectionSprite();
 	void collide();
 	void update(float);
+	bool isTouched(Vec2);
 
 	Sprite* getSprite();
 	Animate* getAnimate();

@@ -90,14 +90,6 @@ void LevelOne::spawnEevee() {
     }
 }
 
-void LevelOne::update(float delta) {
-    for (size_t i = 0; i < this->_eevings.size(); i++)
-    {
-        Eevee* eevee = this->_eevings[i];
-        eevee->update(delta);
-    }
-}
-
 void LevelOne::MouseUp(Event* event) {
     EventMouse* e = (EventMouse*)event;
     int button = int(e->getMouseButton());
@@ -105,11 +97,9 @@ void LevelOne::MouseUp(Event* event) {
 
     for (size_t i = 0; i < this->_eevings.size(); i++)
     {
-        Rect eeveeBounds = _eevings[i]->getSprite()->getBoundingBox();
-
-        if (eeveeBounds.containsPoint(mousePosition)) {
-            cocos2d::log("eevee touched :");
-            cocos2d::log(std::to_string(this->_eevings[i]->getId()).c_str());
+        Eevee* eevee = this->_eevings[i];
+        if (eevee->isTouched(mousePosition)) {
+            //
         }
     }
 }
