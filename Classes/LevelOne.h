@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "Eevee.h"
 
+#include <vector>
+
 class LevelOne : public cocos2d::Scene
 {
 public:
@@ -17,7 +19,7 @@ public:
 protected:
     TMXTiledMap* _tilemap;
     TMXLayer* _background;
-    TMXLayer* _collision;
+    TMXObjectGroup* _collision;
     Eevee* _eevee;
     //Sprite* _menuScreen;
     int pas = 50;

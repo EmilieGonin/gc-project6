@@ -4,6 +4,7 @@ USING_NS_CC;
 
 
 
+
 Scene* LevelOne::createScene() {
     Scene* scene = Scene::create();
     LevelOne* layer = LevelOne::create();
@@ -33,16 +34,37 @@ bool LevelOne::init()
     this->_eevee = new Eevee;
 
 
-    /*auto map = TMXTiledMap::create("Map1.tmx");
-    this->addChild(map, 0, 99);*/
-
-    _tilemap = new TMXTiledMap();
-    _tilemap->initWithTMXFile("Map1.tmx");
-    _background=_tilemap->getLayer("background");
-    _collision = _tilemap->getLayer("collision");
-    /*_collision->setVisible(false);*/
-
+    auto _tilemap = TMXTiledMap::create("Map1.tmx");
     this->addChild(_tilemap);
+
+    /*_tilemap = new TMXTiledMap();
+    _tilemap->initWithTMXFile("Map1.tmx");
+    _background = _tilemap->getLayer("background");
+    _collidable = _tilemap->getLayer("collidable");
+    _collidable->setVisible(false);
+    _collision = _tilemap->getObjectGroup("collision");
+    
+    this->addChild(_tilemap);*/
+
+    /*TMXObjectGroup* collisions = _tilemap->getObjectGroup("collision");
+    ValueVector& rectangle_array = collisions->getObjects();
+    for (cocos2d::Value& rectangle_box : rectangle_array) {
+        cocos2d::ValueMap rectangle_box_properties = rectangle_box.asValueMap();
+
+        Node* node = Node::create();
+        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+        node->setPhysicsBody(box);
+
+        box->setGroup(-1);
+        box->setContactTestBitmask(1);
+
+        node->setPosition(Vec2(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / rectangle_box_properties["height"].asInt(), rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / rectangle_box_properties["width"].asInt()));
+        box->setGravityEnable(false);
+        box->setDynamic(false);
+
+        this->addChild(node, 20);
+    }*/
+
 
     Sprite* menu = Sprite::create("interface/interface.png");
     menu->setScale(1,1);
@@ -67,6 +89,8 @@ bool LevelOne::init()
 
     return true;    
 }   
+
+
 
 void LevelOne::update(float delta) {
 
