@@ -14,8 +14,6 @@ public:
     void spawnEevee();
     bool onContactBegin(PhysicsContact&);
     bool onContactSeparate(PhysicsContact&);
-    void spawnEevee();
-    void MouseUp(cocos2d::Event* event);
 
 protected:
     TMXTiledMap* _tilemap;
