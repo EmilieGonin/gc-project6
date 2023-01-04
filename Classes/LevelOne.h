@@ -9,6 +9,12 @@ public:
     virtual bool init();
     //void menuCloseCallback(cocos2d::Ref* pSender);
     CREATE_FUNC(LevelOne);
+
+  
+    void MouseUp(cocos2d::Event* event);
+    void spawnEevee();
+    bool onContactBegin(PhysicsContact&);
+    bool onContactSeparate(PhysicsContact&);
     void spawnEevee();
     void MouseUp(cocos2d::Event* event);
 

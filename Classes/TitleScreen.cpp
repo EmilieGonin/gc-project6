@@ -5,9 +5,6 @@ USING_NS_CC;
 
 Scene* TitleScreen::createScene()
 {
-    /*Scene* scene = Scene::create();
-    TitleScreen* layer = TitleScreen::create();
-    scene->addChild(layer);*/
     Scene* scene = TitleScreen::create();
     return scene;
 }
