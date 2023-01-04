@@ -1,25 +1,19 @@
 #include "Eevee.h"
 #include <iostream>
-Eevee::Eevee() {
-	
-
+Eevee::Eevee(Sprite* sprite, int id) {
     // 0 - 3 going left 4 - 6 going right
 
     SpriteFrameCache* spritecache = SpriteFrameCache::getInstance();
     spritecache->addSpriteFramesWithFile("sprites/character.plist");
 
-    this->_sprite = Sprite::create("sprites/character.png");
-    this->_sprite->setScale(2, 2);
-    this->_sprite->setPosition(100, 100);
-    Vec2 myAnchorPoint(0.5, 0.5);
-    this->_sprite->setAnchorPoint(myAnchorPoint);
-
-    this->_direction = 0;
-
-    this->_frames = getAnimation("%04d.png", 3);
-    this->_animation = Animation::createWithSpriteFrames(this->_frames, 0.2f);
-    this->_animate = Animate::create(this->_animation);
+    _sprite = sprite;
+    _direction = 0;
+    _frames = getAnimation("%04d.png", 3);
+    _animation = Animation::createWithSpriteFrames(this->_frames, 0.2f);
+    _animate = Animate::create(this->_animation);
     _skill = 0;
+    _id = id;
+    _pas = 50;
 };
 Eevee::~Eevee() {};
 
@@ -51,21 +45,41 @@ void Eevee::setDirectionSprite() {
 
  }
 
-void Eevee::collide() {
-
-    if(this->_sprite->getScaleX() == 2)
-    {
-
-        OutputDebugStringA(std::to_string(this->_direction).c_str());
-        this->_sprite->setScaleX(-2);
-    }
-    else
-    {
-        this->_sprite->setScaleX(2);
-    }
-
+void Eevee::update(float delta) {
+    Vec2 position = _sprite->getPosition();
+    position.x -= _pas * delta;
+    _sprite->setPosition(position);
 }
+
+bool Eevee::isTouched(Vec2 position) {
+    Rect eeveeBounds = _sprite->getBoundingBox();
+
+    if (eeveeBounds.containsPoint(position)) {
+        cocos2d::log(("eevee touched : " + std::to_string(_id)).c_str());
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void Eevee::collide() {
+    
+     /*   log("je collide my tag %d %d", contact.getShapeB()->getBody()->getTag(), getId());*/
+            if (this->_sprite->getScaleX() == 2)
+            {
+                this->_sprite->setScaleX(-2);
+                _pas *= -1;
+            }
+            else
+            {
+                this->_sprite->setScaleX(2);
+                _pas *= -1;
+            }
+}
+
 
 Sprite* Eevee::getSprite() { return this->_sprite; }
 Animate* Eevee::getAnimate() { return _animate; }
 int Eevee::getSkill() { return _skill; };
+int Eevee::getId() { return _id; };

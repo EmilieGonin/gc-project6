@@ -5,11 +5,8 @@ USING_NS_CC;
 
 Scene* TitleScreen::createScene()
 {
-    Scene* scene = Scene::create();
-    TitleScreen* layer = TitleScreen::create();
-    scene->addChild(layer);
+    Scene* scene = TitleScreen::create();
     return scene;
-
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -24,13 +21,19 @@ bool TitleScreen::init()
 {
     //////////////////////////////
     // 1. super init first
-      //////////////////////////////
-    // 1. super init first
     if (!Scene::init())
     {
         return false;
     }
 
+    this->start = Label::createWithTTF("Start", "fonts/arial.ttf", 25);
+    start->setTextColor(Color4B::WHITE);
+    start->setPosition(100, 200);
+    //_labels.push_back(start);
+    this->quit = Label::createWithTTF("Quit", "fonts/arial.ttf", 25);
+    quit->setTextColor(Color4B::WHITE);
+    quit->setPosition(100, 135);
+    //_labels.push_back(quit);
 
     _menuScreen = Sprite::create("menuScreen.png");
     _menuScreen->setScale(0.65, 0.65);
@@ -43,6 +46,8 @@ bool TitleScreen::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     this->addChild(_menuScreen, 0);
+    this->addChild(start, 1);
+    this->addChild(quit, 1);
 
     return true;
 }
@@ -53,13 +58,18 @@ void TitleScreen::MouseUp(Event* event) {
   
     Vec2 mousePosition = e->getLocationInView();
     Rect menuBounds = _menuScreen->getBoundingBox();
+    Rect startBounds = this->start->getBoundingBox();
+    Rect quitBounds = this->quit->getBoundingBox();
    
-    if (menuBounds.containsPoint(mousePosition)) {
+    if (startBounds.containsPoint(mousePosition)) {
         cocos2d::log("menu touched");
         auto director = Director::getInstance();
         auto scene = LevelOne::createScene();
         director->replaceScene(scene);
     }
-
-  
+    if (quitBounds.containsPoint(mousePosition)) {
+   
+        auto director = Director::getInstance();
+        director->end();
+    }
 }
