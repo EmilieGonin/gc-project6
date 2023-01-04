@@ -25,8 +25,10 @@ bool LevelOne::init()
     if ( !Scene::initWithPhysics() )
     {
         return false;
-    }                
+    }
 
+    //powers inventory
+    _powers[0] = 2;
 
     auto _tilemap = TMXTiledMap::create("Map1.tmx");
     this->addChild(_tilemap);
@@ -169,13 +171,19 @@ void LevelOne::MouseUp(Event* event) {
     EventMouse* e = (EventMouse*)event;
     int button = int(e->getMouseButton());
     Vec2 mousePosition = e->getLocationInView();
+    int skill = 2; //Temp skill, need to get it dynamically
 
     for (size_t i = 0; i < this->_eevings.size(); i++)
     {
-
         Eevee* eevee = this->_eevings[i];
-        if (eevee->isTouched(mousePosition)) {
-            eevee->setSkill(1);
+        if (eevee->isTouched(mousePosition) && skill) {
+            if (_powers[skill - 1]) {
+                eevee->setSkill(skill);
+                _powers[skill - 1]--;
+            }
+            else {
+                cocos2d::log("power not available");
+            }
         }
     }
 }
