@@ -44,10 +44,9 @@ bool TitleScreen::init()
     _menuScreen->setPosition(0, 0);
 
     //MouseEvents
-    EventListenerMouse* _listener = nullptr;
-    _listener = EventListenerMouse::create();
-    _listener->onMouseUp = CC_CALLBACK_1(TitleScreen::MouseUp, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener, this);
+    EventListenerMouse* listener = EventListenerMouse::create();
+    listener->onMouseUp = CC_CALLBACK_1(TitleScreen::MouseUp, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     this->addChild(_menuScreen, 0);
     this->addChild(start, 1);
@@ -71,7 +70,7 @@ void TitleScreen::MouseUp(Event* event) {
         auto scene = LevelOne::createScene();
         director->replaceScene(scene);
     }
-    else if (quitBounds.containsPoint(mousePosition)) {
+    if (quitBounds.containsPoint(mousePosition)) {
    
         auto director = Director::getInstance();
         director->end();
