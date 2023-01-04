@@ -53,10 +53,13 @@ void Eevee::update(float delta) {
 
 void Eevee::useSkill(int skill) {
     if (skill == 1) {
-        //
+        _sprite->setColor(Color3B::RED);
     }
     else if (skill == 2) {
-        //
+        _sprite->setColor(Color3B::BLUE);
+    }
+    else if (skill == 3) {
+        _sprite->setColor(Color3B::GREEN);
     }
 }
 
