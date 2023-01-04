@@ -1,8 +1,6 @@
 #include "Eevee.h"
 #include <iostream>
 Eevee::Eevee(Sprite* sprite, int id) {
-	
-
     // 0 - 3 going left 4 - 6 going right
 
     SpriteFrameCache* spritecache = SpriteFrameCache::getInstance();
