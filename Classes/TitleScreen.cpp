@@ -5,9 +5,10 @@ USING_NS_CC;
 
 Scene* TitleScreen::createScene()
 {
-    Scene* scene = Scene::create();
+    /*Scene* scene = Scene::create();
     TitleScreen* layer = TitleScreen::create();
-    scene->addChild(layer);
+    scene->addChild(layer);*/
+    Scene* scene = TitleScreen::create();
     return scene;
 }
 
@@ -43,9 +44,10 @@ bool TitleScreen::init()
     _menuScreen->setPosition(0, 0);
 
     //MouseEvents
-    EventListenerMouse* listener = EventListenerMouse::create();
-    listener->onMouseUp = CC_CALLBACK_1(TitleScreen::MouseUp, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    EventListenerMouse* _listener = nullptr;
+    _listener = EventListenerMouse::create();
+    _listener->onMouseUp = CC_CALLBACK_1(TitleScreen::MouseUp, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener, this);
 
     this->addChild(_menuScreen, 0);
     this->addChild(start, 1);
@@ -69,7 +71,7 @@ void TitleScreen::MouseUp(Event* event) {
         auto scene = LevelOne::createScene();
         director->replaceScene(scene);
     }
-    if (quitBounds.containsPoint(mousePosition)) {
+    else if (quitBounds.containsPoint(mousePosition)) {
    
         auto director = Director::getInstance();
         director->end();

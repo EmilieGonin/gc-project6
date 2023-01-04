@@ -3,19 +3,11 @@
 USING_NS_CC;
 
 Scene* LevelOne::createScene() {
-    // 'scene' is an autorelease object
-    auto scene = Scene::createWithPhysics();
+    Scene* scene = LevelOne::createWithPhysics();
+    scene = LevelOne::create();
     scene->getPhysicsWorld()->setGravity(Vect(0, -200));
-
-    // 'layer' is an autorelease object
-    auto layer = LevelOne::create();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-    // add layer as a child to scene
-    scene->addChild(layer);
-
-    // return the scene
     return scene;
-
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -30,7 +22,7 @@ bool LevelOne::init()
 {
     //////////////////////////////
     // 1. super init first
-    if ( !Scene::init() )
+    if ( !Scene::initWithPhysics() )
     {
         return false;
     }                
