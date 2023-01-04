@@ -32,4 +32,7 @@ public:
 	Sprite* getSprite();
 	Animate* getAnimate();
 	int getId();
+
+	//Setters
+	void setSkill(int);
 };

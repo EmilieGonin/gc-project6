@@ -175,8 +175,7 @@ void LevelOne::MouseUp(Event* event) {
 
         Eevee* eevee = this->_eevings[i];
         if (eevee->isTouched(mousePosition)) {
-            //
-
+            eevee->setSkill(1);
         }
     }
 }
