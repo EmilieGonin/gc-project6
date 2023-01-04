@@ -9,7 +9,6 @@ Scene* TitleScreen::createScene()
     TitleScreen* layer = TitleScreen::create();
     scene->addChild(layer);
     return scene;
-
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -24,8 +23,6 @@ bool TitleScreen::init()
 {
     //////////////////////////////
     // 1. super init first
-      //////////////////////////////
-    // 1. super init first
     if (!Scene::init())
     {
         return false;
@@ -34,9 +31,11 @@ bool TitleScreen::init()
     this->start = Label::createWithTTF("Start", "fonts/arial.ttf", 25);
     start->setTextColor(Color4B::WHITE);
     start->setPosition(100, 200);
+    //_labels.push_back(start);
     this->quit = Label::createWithTTF("Quit", "fonts/arial.ttf", 25);
     quit->setTextColor(Color4B::WHITE);
     quit->setPosition(100, 135);
+    //_labels.push_back(quit);
 
     _menuScreen = Sprite::create("menuScreen.png");
     _menuScreen->setScale(0.65, 0.65);
@@ -75,10 +74,4 @@ void TitleScreen::MouseUp(Event* event) {
         auto director = Director::getInstance();
         director->end();
     }
-
-  
 }
-
-//void handleEvent(Event* event) {
-//    //
-//}

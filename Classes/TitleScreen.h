@@ -14,5 +14,4 @@ protected:
     Label* start;
     Label* quit;
     Sprite* _menuScreen;
-    int pas = 50;
 };

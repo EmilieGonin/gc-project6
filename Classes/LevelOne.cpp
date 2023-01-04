@@ -2,8 +2,6 @@
 #include "functions.h"
 USING_NS_CC;
 
-
-
 Scene* LevelOne::createScene() {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
