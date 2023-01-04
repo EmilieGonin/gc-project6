@@ -143,8 +143,8 @@ bool LevelOne::onContactBegin(PhysicsContact& contact) {
 
     //("onContacftBegin %d %d", contact.getShapeA()->getBody()->getCollisionBitmask(), contact.getShapeB()->getBody()->getCollisionBitmask());
    
-    log("my size %d", this->_eevings.size());
-    log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
+    //log("my size %d", this->_eevings.size());
+    //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
         if (this->_eevings.size() == 7) {
             {
