@@ -25,17 +25,8 @@ public:
 	void update(float);
 	bool isTouched(Vec2);
 
+	//Getters
 	Sprite* getSprite();
 	Animate* getAnimate();
-
-	enum class Skill {
-		NONE = 0,
-		FLAREON = 1,
-		JOLTEON = 2,
-		VAPOREON = 3
-	};
-
-	//Getters
-	int getSkill();
 	int getId();
 };

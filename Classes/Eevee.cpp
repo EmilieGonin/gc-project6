@@ -78,8 +78,7 @@ void Eevee::collide() {
             }
 }
 
-
+//Getters
 Sprite* Eevee::getSprite() { return this->_sprite; }
 Animate* Eevee::getAnimate() { return _animate; }
-int Eevee::getSkill() { return _skill; };
 int Eevee::getId() { return _id; };
