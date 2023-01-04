@@ -15,8 +15,11 @@ public:
     //void menuCloseCallback(cocos2d::Ref* pSender);
     CREATE_FUNC(LevelOne);
     void update(float) override;
+  
     void MouseUp(cocos2d::Event* event);
     void spawnEevee();
+    bool onContactBegin(PhysicsContact&);
+    bool onContactSeparate(PhysicsContact&);
 
 protected:
     std::vector<Eevee*> _eevings;

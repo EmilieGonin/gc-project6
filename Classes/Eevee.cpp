@@ -50,32 +50,24 @@ void Eevee::setDirectionSprite() {
 void Eevee::update(float delta) {
     Vec2 position = _sprite->getPosition();
     position.x -= _pas * delta;
-
-    if (position.x < _sprite->getContentSize().width * 0.5 || position.x > Director::getInstance()->getWinSize().width - (_sprite->getBoundingBox().size.width) + _sprite->getContentSize().width * 0.5)
-    {
-        cocos2d::log("eevee collide :");
-        cocos2d::log(std::to_string(_id).c_str());
-        this->collide();
-        _pas *= -1;
-    }
-
     _sprite->setPosition(position);
 }
 
 void Eevee::collide() {
-    cocos2d::log("get scale x :");
-    cocos2d::log(std::to_string(this->_sprite->getScaleX()).c_str());
-
-    if(this->_sprite->getScaleX() == 2)
-    {
-        this->_sprite->setScaleX(-2);
-    }
-    else
-    {
-        this->_sprite->setScaleX(2);
-    }
-
+    
+     /*   log("je collide my tag %d %d", contact.getShapeB()->getBody()->getTag(), getId());*/
+            if (this->_sprite->getScaleX() == 2)
+            {
+                this->_sprite->setScaleX(-2);
+                _pas *= -1;
+            }
+            else
+            {
+                this->_sprite->setScaleX(2);
+                _pas *= -1;
+            }
 }
+
 
 Sprite* Eevee::getSprite() { return this->_sprite; }
 Animate* Eevee::getAnimate() { return _animate; }
