@@ -25,8 +25,10 @@ bool LevelOne::init()
     if ( !Scene::initWithPhysics() )
     {
         return false;
-    }                
+    }
 
+    //powers inventory
+    _powers[0] = 2;
 
     auto _tilemap = TMXTiledMap::create("Map1.tmx");
     this->addChild(_tilemap);
@@ -143,8 +145,8 @@ bool LevelOne::onContactBegin(PhysicsContact& contact) {
 
     //("onContacftBegin %d %d", contact.getShapeA()->getBody()->getCollisionBitmask(), contact.getShapeB()->getBody()->getCollisionBitmask());
    
-    log("my size %d", this->_eevings.size());
-    log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
+    //log("my size %d", this->_eevings.size());
+    //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
         if (this->_eevings.size() == 7) {
             {
@@ -169,14 +171,19 @@ void LevelOne::MouseUp(Event* event) {
     EventMouse* e = (EventMouse*)event;
     int button = int(e->getMouseButton());
     Vec2 mousePosition = e->getLocationInView();
+    int skill = 2; //Temp skill, need to get it dynamically
 
     for (size_t i = 0; i < this->_eevings.size(); i++)
     {
-
         Eevee* eevee = this->_eevings[i];
-        if (eevee->isTouched(mousePosition)) {
-            //
-
+        if (eevee->isTouched(mousePosition) && skill) {
+            if (_powers[skill - 1]) {
+                eevee->setSkill(skill);
+                _powers[skill - 1]--;
+            }
+            else {
+                cocos2d::log("power not available");
+            }
         }
     }
 }

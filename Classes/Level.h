@@ -15,13 +15,6 @@ public:
 protected:
 	std::vector<Eevee*> _eevings;
 	std::vector<Label*> _labels;
-	int _skill;
-
-	enum class Skill {
-		NONE = 0,
-		FLAREON = 1,
-		JOLTEON = 2,
-		VAPOREON = 3
-	};
+	int _powers[4];
 };
 
