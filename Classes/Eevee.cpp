@@ -51,6 +51,15 @@ void Eevee::update(float delta) {
     _sprite->setPosition(position);
 }
 
+void Eevee::useSkill(int skill) {
+    if (skill == 1) {
+        //
+    }
+    else if (skill == 2) {
+        //
+    }
+}
+
 bool Eevee::isTouched(Vec2 position) {
     Rect eeveeBounds = _sprite->getBoundingBox();
 

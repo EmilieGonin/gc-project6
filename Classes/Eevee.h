@@ -25,6 +25,9 @@ public:
 	void update(float);
 	bool isTouched(Vec2);
 
+	//0 = None, 1 = Flareon, 2 = Jolteon, 3 = Vaporeon
+	void useSkill(int);
+
 	//Getters
 	Sprite* getSprite();
 	Animate* getAnimate();
