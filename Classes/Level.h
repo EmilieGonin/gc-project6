@@ -22,6 +22,7 @@ protected:
 public:
 	void createMap(TMXTiledMap* tilemap);
 	void update(float) override;
+	void spawnEevee(int);
 	//void MouseUp(cocos2d::Event* event);
 
 	//Setters

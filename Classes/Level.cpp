@@ -19,6 +19,58 @@ void Level::decreaseSpeed() {
     }
 }
 
+void Level::spawnEevee(int number) {
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize.setSize(visibleSize.width, 1500);
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto edgebody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(0.0f, 0.2f, 0.1f), 3);
+    auto edgenode = Node::create();
+    edgenode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+    edgenode->setPhysicsBody(edgebody);
+    edgebody->setCollisionBitmask(2);
+    edgebody->setContactTestBitmask(true);
+    this->addChild(edgenode);
+
+    Sprite* eeveeSprite = nullptr;
+    for (size_t i = 0; i < number; i++)
+    {
+        cocos2d::log("eevee created");
+        eeveeSprite = Sprite::create("sprites/0000.png");
+        eeveeSprite->setScale(2, 2);
+        eeveeSprite->setPosition(550, 950);
+        Vec2 myAnchorPoint(0.5, 0.5);
+        eeveeSprite->setAnchorPoint(myAnchorPoint);
+
+        PhysicsBody* physicsBody = PhysicsBody::createBox(Size(eeveeSprite->getContentSize().width, eeveeSprite->getContentSize().height),
+            PhysicsMaterial(0.0f, 0.0f, 0.0f));
+        physicsBody->setDynamic(true);
+        physicsBody->setCollisionBitmask(1);
+        physicsBody->setContactTestBitmask(true);
+        physicsBody->setTag(i);
+        physicsBody->setRotationEnable(false);
+        physicsBody->setGravityEnable(false);
+
+        Eevee* eevee = new Eevee(eeveeSprite, i);
+        this->_eevings.push_back(eevee);
+        log("%d", this->_eevings.size());
+
+        eeveeSprite->addComponent(physicsBody);
+        this->addChild(eeveeSprite);
+        eevee->move();
+
+        Hide* hide = Hide::create();
+        Show* show = Show::create();
+        //MoveBy* move = MoveBy::create(1, Vec2(0,-100));
+        DelayTime* delay = DelayTime::create(i);
+        CallFunc* callback = CallFunc::create([eevee, physicsBody]() {
+            physicsBody->setGravityEnable(true);
+            });
+        Sequence* sequence = Sequence::create(hide, delay, show, callback, NULL);
+        eeveeSprite->runAction(sequence);
+    }
+
+}
+
 //void Level::MouseUp(Event* event) {
 //    EventMouse* e = (EventMouse*)event;
 //    //int button = int(e->getMouseButton());
