@@ -21,21 +21,25 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool TitleScreen::init()
 {
+    
+    
     //////////////////////////////
     // 1. super init first
     if (!Scene::init())
     {
         return false;
     }
-
+  
+    //_myLevels.push_back(LevelOne::createScene());
+  
     this->start = Label::createWithTTF("Start", "fonts/Hansip.otf", 25);
     start->setTextColor(Color4B::WHITE);
     start->setPosition(100, 200);
-    //_labels.push_back(start);
+   
     this->quit = Label::createWithTTF("Quit", "fonts/Hansip.otf", 25);
     quit->setTextColor(Color4B::WHITE);
     quit->setPosition(100, 135);
-    //_labels.push_back(quit);
+  
 
     _menuScreen = Sprite::create("menuScreen.png");
   
@@ -64,9 +68,11 @@ void TitleScreen::MouseUp(Event* event) {
     Rect quitBounds = this->quit->getBoundingBox();
    
     if (startBounds.containsPoint(mousePosition)) {
-        cocos2d::log("menu touched");
+        cocos2d::log("menu touched %d" , _myLevels.size());
+        
         auto director = Director::getInstance();
         auto scene = LevelTwo::createScene();
+
         director->replaceScene(scene);
     }
     if (quitBounds.containsPoint(mousePosition)) {

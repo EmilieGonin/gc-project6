@@ -14,6 +14,7 @@ Eevee::Eevee(Sprite* sprite, int id) {
     _skill = 0;
     _id = id;
     _pas = 0;
+    _formerPas = 1;
 };
 Eevee::~Eevee() {};
 
