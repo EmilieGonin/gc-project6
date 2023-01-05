@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><tileset version="1.9" tiledversion="1.9.2" name="tileSheet_map1" tilewidth="32" tileheight="32" tilecount="1080" columns="30"><image source="tileSheet_map1.png" width="960" height="1182"/></tileset>
