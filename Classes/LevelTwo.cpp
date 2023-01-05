@@ -22,6 +22,7 @@ bool LevelTwo::init()
     {
         return false;
     }
+
     
     //powers inventory
     collisionType.clear();
@@ -36,11 +37,13 @@ bool LevelTwo::init()
     _xSpawn = 400;
     _ySpawn = 1000;
 
-    _powers[0] = 2;
+
 
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
+    int inventory[5] = { 2, 0 };
+    createMenu(inventory);
 
     _baseEevings = 1;
     spawnEevee(_baseEevings);
@@ -68,26 +71,5 @@ bool LevelTwo::init()
 
 
 void LevelTwo::MouseUp(Event* event) {
-    EventMouse* e = (EventMouse*)event;
-    int button = int(e->getMouseButton());
-    Vec2 mousePosition = e->getLocationInView();
-    int skill = 2; //Temp skill, need to get it dynamically
-
-    for (size_t i = 0; i < this->_eevings.size(); i++)
-    {
-        Eevee* eevee = this->_eevings[i];
-        if (eevee->isTouched(mousePosition)) {
-            increaseSpeed(); //debug only
-        }
-
-        if (eevee->isTouched(mousePosition) && skill) {
-            if (_powers[skill - 1]) {
-                eevee->setSkill(skill);
-                _powers[skill - 1]--;
-            }
-            else {
-                cocos2d::log("power not available");
-            }
-        }
-    }
+    handleEvent(event);
 }
