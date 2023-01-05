@@ -33,6 +33,7 @@ public:
 	Animate* getAnimate();
 	int getFormerPas();
 	int getId();
+	int getPas();
 
 	//Setters
 	void setSkill(int);

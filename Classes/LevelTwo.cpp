@@ -22,20 +22,32 @@ bool LevelTwo::init()
     {
         return false;
     }
-
+    
     //powers inventory
+    /*collisionType.clear();
+    collisionType.push_back(2);
+    collisionType.push_back(1);
+    collisionType.push_back(2);
+    collisionType.push_back(2);
+    collisionType.push_back(2);
+    collisionType.push_back(2);*/
+
+
+    _xSpawn = 400;
+    _ySpawn = 1000;
+
     _powers[0] = 2;
 
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
 
-    _baseEevings = 10;
+    _baseEevings = 1;
     spawnEevee(_baseEevings);
 
     EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
-    contactListener->onContactBegin = CC_CALLBACK_1(LevelTwo::onContactBegin, this);
-    //contactListener->onContactSeparate = CC_CALLBACK_1(LevelOne::onContactSeparate, this);
+    contactListener->onContactBegin = CC_CALLBACK_1(Level::onContactBegin, this);
+    //contactListener->onContactSeparate = CC_CALLBACK_1(Level::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithFixedPriority(contactListener, 1);
 
     Sprite* menu = Sprite::create("interface/interface.png");
@@ -53,39 +65,6 @@ bool LevelTwo::init()
     return true;
 }
 
-bool LevelTwo::onContactBegin(PhysicsContact& contact) {
-
-
-    //("onContacftBegin %d %d", contact.getShapeA()->getBody()->getCollisionBitmask(), contact.getShapeB()->getBody()->getCollisionBitmask());
-
-    //log("my size %d", this->_eevings.size());
-    //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
-    }
-
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(1);
-
-    }
-    if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
-        return false;
-    }
-    return true;
-}
-
-bool LevelTwo::onContactSeparate(PhysicsContact& contact) {
-    log("onContactSeparate %d %d", contact.getShapeA()->getGroup(), contact.getShapeB()->getGroup());
-
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
-
-    }
-    return true;
-}
 
 
 void LevelTwo::MouseUp(Event* event) {

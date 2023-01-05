@@ -5,7 +5,7 @@ USING_NS_CC;
 Scene* LevelOne::createScene() {
     Scene* scene = LevelOne::createWithPhysics();
     scene = LevelOne::create();
-    scene->getPhysicsWorld()->setGravity(Vect(0, -1000));
+    scene->getPhysicsWorld()->setGravity(Vect(0, -750));
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     return scene;
@@ -29,7 +29,16 @@ bool LevelOne::init()
     {
         return false;
     }
+    collisionType.clear();
+    collisionType.push_back(3);
+    collisionType.push_back(3);
+    collisionType.push_back(3);
+    collisionType.push_back(3);
+    collisionType.push_back(2);
 
+
+    _xSpawn = 550;
+    _ySpawn = 950;
     //powers inventory
     _powers[0] = 2;
     _powers[1] = 0;
@@ -72,85 +81,7 @@ bool LevelOne::init()
     return true;    
 }
 
-bool LevelOne::onContactBegin(PhysicsContact& contact) {
-    
 
-    //("onContacftBegin %d %d", contact.getShapeA()->getBody()->getCollisionBitmask(), contact.getShapeB()->getBody()->getCollisionBitmask());
-   
-    //log("my size %d", this->_eevings.size());
-    //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-       //  collide avec mur
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
-    }
-
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-        //pour relancer la marche après une chute
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
-    }
-        
-
-    //EEVEE POWERS
-
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 4) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 4 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        //  collide avec water pour swim
-        // if eevee swimmeaon -> walk else die
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 5) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 5 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        //  collide avec "water but ice power
-        // if eevee glaceon -> enable collision
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 6) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 6 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        //  collide avec lever volteon
-        // if eevee == volteon -> activate lever
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 7) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 7 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        //  collide avec door 
-        //code pour detruire eevee et pour augmenter _savedEevings
-    }
-
-
-
-    if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
-        //pour transpercer
-        return false;
-    }
-    return true;
-    }
-
-
-bool LevelOne::onContactSeparate(PhysicsContact& contact) {
-    log("onContactSeparate %d %d", contact.getShapeA()->getGroup(), contact.getShapeB()->getGroup());
-
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(0);
-       //stop moving wehn falling
-    }
-
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 4) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 4 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 5) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 5 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 6) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 6 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 7) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 7 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-
-    return true;
-}
 
 
 void LevelOne::MouseUp(Event* event) {

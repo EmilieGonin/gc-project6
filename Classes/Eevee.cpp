@@ -86,13 +86,13 @@ void Eevee::collide() {
      /*   log("je collide my tag %d %d", contact.getShapeB()->getBody()->getTag(), getId());*/
             if (this->_sprite->getScaleX() == 2)
             {
-                this->_sprite->setScaleX(-2);
+                this->_sprite->setScaleX(-2);      
                 _pas *= -1;
                 _formerPas = _pas;
             }
             else
             {
-                this->_sprite->setScaleX(2);
+                this->_sprite->setScaleX(2); 
                 _pas *= -1;
                 _formerPas = _pas;
             }
@@ -104,6 +104,7 @@ Sprite* Eevee::getSprite() { return this->_sprite; }
 Animate* Eevee::getAnimate() { return _animate; }
 int Eevee::getId() { return _id; };
 int Eevee::getFormerPas() { return _formerPas; }
+int Eevee::getPas() { return _pas; }
 
 //Setters
 void Eevee::setSkill(int skill) { _skill = skill; }

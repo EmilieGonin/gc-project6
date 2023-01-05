@@ -14,8 +14,7 @@ public:
 
 
     void MouseUp(cocos2d::Event* event);
-    bool onContactBegin(PhysicsContact&);
-    bool onContactSeparate(PhysicsContact&);
+
 
 protected:
     TMXTiledMap* _tilemap;
