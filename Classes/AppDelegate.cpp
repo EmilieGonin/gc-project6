@@ -52,7 +52,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 
-        glview = GLViewImpl::createWithRect("Eevings", cocos2d::Rect(0, 0, 1920, 1084));
+        glview = GLViewImpl::createWithFullScreen("Eevings");
 #else
         glview = GLViewImpl::create("Eevings");
 #endif
