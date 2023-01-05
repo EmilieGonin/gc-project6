@@ -45,7 +45,7 @@ bool LevelOne::init()
 
     
 
-    spawnEevee();
+    spawnEevee(10);
 
     EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(LevelOne::onContactBegin, this);
@@ -65,52 +65,6 @@ bool LevelOne::init()
     this->scheduleUpdate();
 
     return true;    
-}
-
-void LevelOne::spawnEevee() {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    visibleSize.setSize(visibleSize.width, 1500);
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    auto edgebody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(0.0f, 0.2f, 0.1f), 3);
-    auto edgenode = Node::create();
-    edgenode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2+ origin.y));
-    edgenode->setPhysicsBody(edgebody);
-    edgebody->setCollisionBitmask(2);
-    edgebody->setContactTestBitmask(true);
-    this->addChild(edgenode);
-        
-    Sprite* eeveeSprite = nullptr;
-    for (size_t i = 0; i < 7; i++)
-    {
-        cocos2d::log("eevee created");
-        eeveeSprite = Sprite::create("sprites/0000.png");
-        eeveeSprite->setScale(2, 2);
-        eeveeSprite->setPosition(1500 + i * 50, 1000);
-        Vec2 myAnchorPoint(0.5, 0.5);
-        eeveeSprite->setAnchorPoint(myAnchorPoint);
-        
-        PhysicsBody* physicsBody = PhysicsBody::createBox(Size(eeveeSprite->getContentSize().width, eeveeSprite->getContentSize().height),
-            PhysicsMaterial(0.0f, 0.0f, 0.0f));
-        physicsBody->setDynamic(true);
-        physicsBody->setCollisionBitmask(1);
-        physicsBody->setContactTestBitmask(true);
-        physicsBody->setTag(i);
-        physicsBody->setRotationEnable(false);
-        
-        
-        
-
-        physicsBody->setGravityEnable(true);
-
-        Eevee* eevee = new Eevee(eeveeSprite, i );
-        this->_eevings.push_back(eevee);
-        log("%d", this->_eevings.size());
-
-        eeveeSprite->addComponent(physicsBody);
-        this->addChild(eeveeSprite);
-        eevee->move();
-    }
-    
 }
 
 bool LevelOne::onContactBegin(PhysicsContact& contact) {

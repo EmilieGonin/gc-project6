@@ -11,7 +11,6 @@ public:
 
   
     void MouseUp(cocos2d::Event* event);
-    void spawnEevee();
     bool onContactBegin(PhysicsContact&);
     bool onContactSeparate(PhysicsContact&);
 
