@@ -813,6 +813,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\functions.h" />
     <ClInclude Include="..\Classes\Level.h" />
     <ClInclude Include="..\Classes\LevelOne.h" />
+    <ClInclude Include="..\Classes\LevelTwo.h" />
     <ClInclude Include="..\Classes\TitleScreen.h" />
     <ClInclude Include="..\Classes\WinScreen.h" />
     <ClInclude Include="Z:\Classes\AppDelegate.h" />
@@ -822,6 +823,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\functions.cpp" />
     <ClCompile Include="..\Classes\Level.cpp" />
     <ClCompile Include="..\Classes\LevelOne.cpp" />
+    <ClCompile Include="..\Classes\LevelTwo.cpp" />
     <ClCompile Include="..\Classes\TitleScreen.cpp" />
     <ClCompile Include="..\Classes\WinScreen.cpp" />
     <ClCompile Include="Z:\Classes\AppDelegate.cpp" />
