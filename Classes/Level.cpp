@@ -59,6 +59,14 @@ void Level::handleEvent(Event* event) {
             }
         }
     }
+
+    if (_fastFor && isTouched(_fastFor)) {
+        increaseSpeed();
+    }
+
+    if (_slowFor && isTouched(_slowFor)) {
+        decreaseSpeed();
+    }
 }
 
 bool Level::isTouched(Sprite* sprite) {
