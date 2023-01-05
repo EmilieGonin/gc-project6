@@ -13,7 +13,7 @@ Eevee::Eevee(Sprite* sprite, int id) {
     _animate = Animate::create(this->_animation);
     _skill = 0;
     _id = id;
-    _pas = 50;
+    _pas = 1;
 };
 Eevee::~Eevee() {};
 
@@ -45,10 +45,27 @@ void Eevee::setDirectionSprite() {
 
  }
 
-void Eevee::update(float delta) {
+void Eevee::update(float delta, int speed) {
     Vec2 position = _sprite->getPosition();
-    position.x -= _pas * delta;
+    position.x -= _pas * speed * delta;
     _sprite->setPosition(position);
+
+    if (_skill == 1) {
+        _sprite->setColor(Color3B::RED);
+    }
+    else if (_skill == 2) {
+        _sprite->setColor(Color3B::BLUE);
+    }
+    else if (_skill == 3) {
+        _sprite->setColor(Color3B::GREEN);
+    }
+    else {
+        _sprite->setColor(Color3B::WHITE);
+    }
+}
+
+void Eevee::useSkill(int skill) {
+    //
 }
 
 bool Eevee::isTouched(Vec2 position) {
@@ -78,8 +95,10 @@ void Eevee::collide() {
             }
 }
 
-
+//Getters
 Sprite* Eevee::getSprite() { return this->_sprite; }
 Animate* Eevee::getAnimate() { return _animate; }
-int Eevee::getSkill() { return _skill; };
 int Eevee::getId() { return _id; };
+
+//Setters
+void Eevee::setSkill(int skill) { _skill = skill; }

@@ -22,20 +22,17 @@ public:
 	void move();
 	void setDirectionSprite();
 	void collide();
-	void update(float);
+	void update(float, int);
 	bool isTouched(Vec2);
 
-	Sprite* getSprite();
-	Animate* getAnimate();
-
-	enum class Skill {
-		NONE = 0,
-		FLAREON = 1,
-		JOLTEON = 2,
-		VAPOREON = 3
-	};
+	//0 = None, 1 = Flareon, 2 = Glaceon, 3 = Leafeon
+	void useSkill(int);
 
 	//Getters
-	int getSkill();
+	Sprite* getSprite();
+	Animate* getAnimate();
 	int getId();
+
+	//Setters
+	void setSkill(int);
 };
