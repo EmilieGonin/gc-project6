@@ -5,8 +5,9 @@ USING_NS_CC;
 Scene* LevelOne::createScene() {
     Scene* scene = LevelOne::createWithPhysics();
     scene = LevelOne::create();
-    scene->getPhysicsWorld()->setGravity(Vect(0, -200));
+    scene->getPhysicsWorld()->setGravity(Vect(0, -1000));
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    
     return scene;
 }
 
@@ -20,6 +21,8 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool LevelOne::init()
 {
+
+    
     //////////////////////////////
     // 1. super init first
     if ( !Scene::initWithPhysics() )
@@ -29,10 +32,15 @@ bool LevelOne::init()
 
     //powers inventory
     _powers[0] = 2;
+    _powers[1] = 0;
+    _powers[2] = 0;
+    _powers[3] = 0;
+    _powers[4] = 0;
 
     auto _tilemap = TMXTiledMap::create("TuTo.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
+    createMenu();
 
     /*_tilemap = new TMXTiledMap();
     _tilemap->initWithTMXFile("Map1.tmx");
@@ -52,10 +60,7 @@ bool LevelOne::init()
     //contactListener->onContactSeparate = CC_CALLBACK_1(LevelOne::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithFixedPriority(contactListener, 1);
     
-    Sprite* menu = Sprite::create("interface/interface.png");
-    menu->setScale(1,1);
-    menu->setAnchorPoint(Vec2::ZERO);
-    menu->setPosition(0, 0);
+    
 
     //MouseEvents
     EventListenerMouse* listener = EventListenerMouse::create();
@@ -76,13 +81,13 @@ bool LevelOne::onContactBegin(PhysicsContact& contact) {
     //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
 
-       
+       // 
         this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
     }
 
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
 
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(1);
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
 
     }
     if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
@@ -96,7 +101,7 @@ bool LevelOne::onContactSeparate(PhysicsContact& contact) {
     log("onContactSeparate %d %d", contact.getShapeA()->getGroup(), contact.getShapeB()->getGroup());
 
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(0);
        
     }
     return true;

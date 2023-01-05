@@ -9,8 +9,9 @@ public:
     virtual bool init();
     CREATE_FUNC(TitleScreen);
     void MouseUp(cocos2d::Event* event);
-
+    
 protected:
+
     Label* start;
     Label* quit;
     Sprite* _menuScreen;
