@@ -152,10 +152,10 @@ bool LevelOne::onContactBegin(PhysicsContact& contact) {
             }
         }
     }
-        if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
-            return false;
-        }
-        return true;
+    if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
+        return false;
+    }
+    return true;
     }
 
 

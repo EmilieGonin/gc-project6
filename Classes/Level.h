@@ -13,6 +13,7 @@ public:
 	//void MouseUp(cocos2d::Event* event);
 
 protected:
+	int _savedEevings, _baseEevings;
 	std::vector<Eevee*> _eevings;
 	std::vector<Label*> _labels;
 };
