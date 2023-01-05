@@ -181,13 +181,13 @@ void Level::createMenu(int powers[]) {
     _reset->setPosition(1250, 50);
     this->addChild(_reset,5);
 
-    _fastFor = Sprite::create("interface/reset.png");
+    _fastFor = Sprite::create("interface/fastFor.png");
     _fastFor->setScale(0.35, 0.35);
     _fastFor->setAnchorPoint(Vec2::ZERO);
     _fastFor->setPosition(1350, 50);
     this->addChild(_fastFor,5);
 
-    _slowFor = Sprite::create("interface/reset.png");
+    _slowFor = Sprite::create("interface/slowFor.png");
     _slowFor->setScale(0.35, 0.35);
     _slowFor->setAnchorPoint(Vec2::ZERO);
     _slowFor->setPosition(1450, 50);
