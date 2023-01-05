@@ -8,13 +8,20 @@
 
 class Level : public cocos2d::Scene
 {
-public:
-	void update(float) override;
-	//void MouseUp(cocos2d::Event* event);
-
 protected:
 	std::vector<Eevee*> _eevings;
 	std::vector<Label*> _labels;
 	int _powers[4];
+
+	//Speed : 25 (slow), 50 (normal), 75 (fast) 100 (fastest)
+	int _speed = 50;
+
+public:
+	void update(float) override;
+	//void MouseUp(cocos2d::Event* event);
+
+	//Setters
+	void increaseSpeed();
+	void decreaseSpeed();
 };
 

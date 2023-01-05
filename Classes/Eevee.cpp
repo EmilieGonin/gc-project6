@@ -13,7 +13,7 @@ Eevee::Eevee(Sprite* sprite, int id) {
     _animate = Animate::create(this->_animation);
     _skill = 0;
     _id = id;
-    _pas = 50;
+    _pas = 1;
 };
 Eevee::~Eevee() {};
 
@@ -45,9 +45,9 @@ void Eevee::setDirectionSprite() {
 
  }
 
-void Eevee::update(float delta) {
+void Eevee::update(float delta, int speed) {
     Vec2 position = _sprite->getPosition();
-    position.x -= _pas * delta;
+    position.x -= _pas * speed * delta;
     _sprite->setPosition(position);
 
     if (_skill == 1) {

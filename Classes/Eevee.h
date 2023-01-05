@@ -22,7 +22,7 @@ public:
 	void move();
 	void setDirectionSprite();
 	void collide();
-	void update(float);
+	void update(float, int);
 	bool isTouched(Vec2);
 
 	//0 = None, 1 = Flareon, 2 = Glaceon, 3 = Leafeon
