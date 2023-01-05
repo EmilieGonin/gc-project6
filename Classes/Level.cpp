@@ -48,7 +48,7 @@ void Level::handleEvent(Event* event) {
                     eevee->setSkill(_skillSelected);
                     _powersInventory[_skillSelected - 1]--;
                     _powers[_skillSelected - 1]->removeAllChildren();
-                    Label* counter = Label::createWithTTF(std::to_string(_powersInventory[i]), "fonts/Hansip.otf", 25);
+                    Label* counter = Label::createWithTTF(std::to_string(_powersInventory[_skillSelected - 1]), "fonts/Hansip.otf", 25);
                     _powers[_skillSelected - 1]->addChild(counter);
 
                     _skillSelected = 0;
