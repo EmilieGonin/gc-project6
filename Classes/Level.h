@@ -6,6 +6,9 @@
 #include "cocos2d.h"
 #include "Eevee.h"
 
+USING_NS_CC;
+
+
 class Level : public cocos2d::Scene
 {
 protected:
@@ -17,6 +20,7 @@ protected:
 	int _speed = 50;
 
 public:
+	void createMap(TMXTiledMap* tilemap);
 	void update(float) override;
 	//void MouseUp(cocos2d::Event* event);
 

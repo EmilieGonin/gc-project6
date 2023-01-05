@@ -32,6 +32,7 @@ bool LevelOne::init()
 
     auto _tilemap = TMXTiledMap::create("TuTo.tmx");
     this->addChild(_tilemap);
+    createMap(_tilemap);
 
     /*_tilemap = new TMXTiledMap();
     _tilemap->initWithTMXFile("Map1.tmx");
@@ -42,29 +43,7 @@ bool LevelOne::init()
     
     this->addChild(_tilemap);*/
 
-    TMXObjectGroup* collisions_SOL = _tilemap->getObjectGroup("collision_SOL");
-    ValueVector& rectangle_array = collisions_SOL->getObjects();
-    for (cocos2d::Value& rectangle_box : rectangle_array) {
-        cocos2d::ValueMap rectangle_box_properties = rectangle_box.asValueMap();
-
-        Node* node = Node::create();
-        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(3);
-        box->setContactTestBitmask(true);
-
-        node->setPhysicsBody(box);
-
-        //box->setGroup(-1);
-       
-
-        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
-
-        box->setGravityEnable(false);
-        box->setDynamic(false);
-
-        this->addChild(node, 20);
-    }
+    
 
     spawnEevee();
 
