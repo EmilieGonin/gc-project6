@@ -42,7 +42,7 @@ bool LevelTwo::init()
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
-    int inventory[5] = { 2, 0 };
+    int inventory[5] = { 2, 2, 2, 2, 2};
     createMenu(inventory);
 
     _baseEevings = 1;
@@ -57,6 +57,9 @@ bool LevelTwo::init()
     menu->setScale(1, 1);
     menu->setAnchorPoint(Vec2::ZERO);
     menu->setPosition(0, 0);
+
+    
+    
 
     //MouseEvents
     EventListenerMouse* listener = EventListenerMouse::create();

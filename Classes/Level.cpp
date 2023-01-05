@@ -50,7 +50,10 @@ void Level::handleEvent(Event* event) {
                     _powers[_skillSelected - 1]->removeAllChildren();
                     Label* counter = Label::createWithTTF(std::to_string(_powersInventory[_skillSelected - 1]), "fonts/Hansip.otf", 25);
                     _powers[_skillSelected - 1]->addChild(counter);
-
+                    if (_skillSelected == 5) {
+                        JumpTo* jump = JumpTo::create(3, Point(100, 30), 96, 1);
+                        eevee->getSprite()->runAction(jump);
+                    }
                     _skillSelected = 0;
                 }
                 else {
