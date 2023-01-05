@@ -12,6 +12,7 @@ USING_NS_CC;
 class Level : public cocos2d::Scene
 {
 protected:
+	int _savedEevings, _baseEevings;
 	std::vector<Eevee*> _eevings;
 	std::vector<Label*> _labels;
 	int _powers[4];

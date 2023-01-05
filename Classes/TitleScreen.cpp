@@ -1,5 +1,6 @@
 #include "TitleScreen.h"
-#include "LevelOne.h"
+
+#include "WinScreen.h"
 #include "functions.h"
 USING_NS_CC;
 
@@ -26,18 +27,18 @@ bool TitleScreen::init()
         return false;
     }
 
-    this->start = Label::createWithTTF("Start", "fonts/arial.ttf", 25);
+    this->start = Label::createWithTTF("Start", "fonts/Hansip.otf", 25);
     start->setTextColor(Color4B::WHITE);
     start->setPosition(100, 200);
     //_labels.push_back(start);
-    this->quit = Label::createWithTTF("Quit", "fonts/arial.ttf", 25);
+    this->quit = Label::createWithTTF("Quit", "fonts/Hansip.otf", 25);
     quit->setTextColor(Color4B::WHITE);
     quit->setPosition(100, 135);
     //_labels.push_back(quit);
 
     _menuScreen = Sprite::create("menuScreen.png");
-    _menuScreen->setScale(0.65, 0.65);
-    _menuScreen->setAnchorPoint(Vec2::ZERO);
+  
+    _menuScreen->setAnchorPoint(Vec2(0,0));
     _menuScreen->setPosition(0, 0);
 
     //MouseEvents
@@ -64,7 +65,7 @@ void TitleScreen::MouseUp(Event* event) {
     if (startBounds.containsPoint(mousePosition)) {
         cocos2d::log("menu touched");
         auto director = Director::getInstance();
-        auto scene = LevelOne::createScene();
+        auto scene = WinScreen::createScene();
         director->replaceScene(scene);
     }
     if (quitBounds.containsPoint(mousePosition)) {
