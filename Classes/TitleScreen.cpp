@@ -1,6 +1,6 @@
 #include "TitleScreen.h"
 
-#include "WinScreen.h"
+#include "LevelOne.h"
 #include "functions.h"
 USING_NS_CC;
 
@@ -65,7 +65,7 @@ void TitleScreen::MouseUp(Event* event) {
     if (startBounds.containsPoint(mousePosition)) {
         cocos2d::log("menu touched");
         auto director = Director::getInstance();
-        auto scene = WinScreen::createScene();
+        auto scene = LevelOne::createScene();
         director->replaceScene(scene);
     }
     if (quitBounds.containsPoint(mousePosition)) {

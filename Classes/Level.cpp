@@ -145,9 +145,9 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(2);
+        
         box->setContactTestBitmask(true);
-
+        box->setCollisionBitmask(2);
         node->setPhysicsBody(box);
 
         //box->setGroup(-1);

@@ -75,11 +75,13 @@ bool LevelOne::onContactBegin(PhysicsContact& contact) {
     //log("my size %d", this->_eevings.size());
     //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-        if (this->_eevings.size() == 7) {
-            {
-                this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
-            }
-        }
+       
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
+    }
+
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(1);
     }
     if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
         return false;
@@ -90,6 +92,11 @@ bool LevelOne::onContactBegin(PhysicsContact& contact) {
 
 bool LevelOne::onContactSeparate(PhysicsContact& contact) {
     log("onContactSeparate %d %d", contact.getShapeA()->getGroup(), contact.getShapeB()->getGroup());
+
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
+       
+    }
     return true;
 }
 
