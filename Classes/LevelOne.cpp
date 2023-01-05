@@ -44,8 +44,8 @@ bool LevelOne::init()
     this->addChild(_tilemap);*/
 
     
-
-    spawnEevee(10);
+    _baseEevings = 10;
+    spawnEevee(_baseEevings);
 
     EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(LevelOne::onContactBegin, this);
@@ -75,11 +75,7 @@ bool LevelOne::onContactBegin(PhysicsContact& contact) {
     //log("my size %d", this->_eevings.size());
     //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-        if (this->_eevings.size() == 7) {
-            {
-                this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
-            }
-        }
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
     }
     if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
         return false;
