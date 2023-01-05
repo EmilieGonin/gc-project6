@@ -23,13 +23,11 @@ bool LevelTwo::init()
         return false;
     }
 
-    //powers inventory
-    _powersInventory[0] = 2;
-
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
-    createMenu();
+    int inventory[5] = { 2, 0 };
+    createMenu(inventory);
 
     _baseEevings = 10;
     spawnEevee(_baseEevings);

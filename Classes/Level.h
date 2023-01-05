@@ -32,7 +32,7 @@ public:
 	void update(float) override;
 	void handleEvent(Event*);
 	void spawnEevee(int);
-	void createMenu();
+	void createMenu(int[]);
 	void getAllLevels();
 	bool isTouched(Sprite*);
 	//void MouseUp(cocos2d::Event* event);

@@ -7,10 +7,13 @@ void Level::update(float delta) {
         eevee->update(delta, _speed);
     }
 
-    if (_powers.size() && _skillSelected) {
+
+    if (_powers.size()) {
+        Label* counter = nullptr;
+
         for (size_t i = 0; i < _powers.size(); i++)
         {
-            if (i == _skillSelected - 1) {
+            if (_skillSelected && (i == _skillSelected - 1)) {
                 _powers[i]->setColor(Color3B::RED);
             }
             else {
@@ -40,10 +43,14 @@ void Level::handleEvent(Event* event) {
         {
             Eevee* eevee = _eevings[i];
 
-            if (isTouched(eevee->getSprite()) && _skillSelected) {
+            if (isTouched(eevee->getSprite()) && _skillSelected && !eevee->getSkill()) {
                 if (_powersInventory[_skillSelected - 1]) {
                     eevee->setSkill(_skillSelected);
                     _powersInventory[_skillSelected - 1]--;
+                    _powers[_skillSelected - 1]->removeAllChildren();
+                    Label* counter = Label::createWithTTF(std::to_string(_powersInventory[i]), "fonts/Hansip.otf", 25);
+                    _powers[_skillSelected - 1]->addChild(counter);
+
                     _skillSelected = 0;
                 }
                 else {
@@ -128,47 +135,7 @@ void Level::spawnEevee(int number) {
 
 }
 
-//void Level::MouseUp(Event* event) {
-//    EventMouse* e = (EventMouse*)event;
-//    //int button = int(e->getMouseButton());
-//    Vec2 mousePosition = e->getLocationInView();
-//
-//    if (_eevings.size()) {
-//        for (size_t i = 0; i < _eevings.size(); i++)
-//        {
-//            Eevee* eevee = _eevings[i];
-//            if (eevee->isTouched(mousePosition)) {
-//                //
-//            }
-//        }
-//    }
-//
-//    if (_labels.size()) {
-//        for (size_t i = 0; i < _labels.size(); i++)
-//        {
-//            Label* label = _labels[i];
-//            Rect labelBounds = _labels[i]->getBoundingBox();
-//        }
-//    }
-//
-//    Rect menuBounds = _menuScreen->getBoundingBox();
-//
-//    /*if (startBounds.containsPoint(mousePosition)) {
-//        cocos2d::log("menu touched");
-//        auto director = Director::getInstance();
-//        auto scene = LevelOne::createScene();
-//        director->replaceScene(scene);
-//    }
-//    if (quitBounds.containsPoint(mousePosition)) {
-//
-//        auto director = Director::getInstance();
-//        director->end();
-//    }*/
-//
-//
-//}
-
-void Level::createMenu() {
+void Level::createMenu(int powers[]) {
 
     std::string path = "interface/";
     std::string myPowers[5] = { "pyro","feuille","givre","aqua","volt" };
@@ -182,14 +149,20 @@ void Level::createMenu() {
 
 
     Sprite* power = nullptr;
-    for(int i = 0; i < 5 ; i++)
+    Label* counter = nullptr;
+    for(int i = 0; i < myPowers->size(); i++)
     {
-
+        //create level inventory
+        _powersInventory[i] = powers[i];
 
         power = Sprite::create(path + myPowers[i] + ".png");
         power->setScale(1, 1);
         power->setAnchorPoint(Vec2::ZERO);
         power->setPosition(450 +i * 100, 50);
+
+        counter = Label::createWithTTF(std::to_string(_powersInventory[i]), "fonts/Hansip.otf", 25);
+        power->addChild(counter);
+
         this->addChild(power,5);
         _powers.push_back(power);
     }

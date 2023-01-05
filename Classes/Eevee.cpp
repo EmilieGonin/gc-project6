@@ -102,8 +102,9 @@ void Eevee::collide() {
 //Getters
 Sprite* Eevee::getSprite() { return this->_sprite; }
 Animate* Eevee::getAnimate() { return _animate; }
-int Eevee::getId() { return _id; };
+int Eevee::getId() { return _id; }
 int Eevee::getFormerPas() { return _formerPas; }
+int Eevee::getSkill() { return _skill; }
 
 //Setters
 void Eevee::setSkill(int skill) { _skill = skill; }
