@@ -28,9 +28,7 @@ bool LevelOne::init()
     }                
 
 
-    auto _tilemap = TMXTiledMap::create("Map1.tmx");
-    _background = _tilemap->getLayer("background");
-    _background->setVisible(true);
+    auto _tilemap = TMXTiledMap::create("TuTo.tmx");
     this->addChild(_tilemap);
 
     /*_tilemap = new TMXTiledMap();
@@ -42,27 +40,29 @@ bool LevelOne::init()
     
     this->addChild(_tilemap);*/
 
-    //TMXObjectGroup* collisions_SOL = _tilemap->getObjectGroup("collision_SOL");
-    //ValueVector& rectangle_array = collisions_SOL->getObjects();
-    //for (cocos2d::Value& rectangle_box : rectangle_array) {
-    //    cocos2d::ValueMap rectangle_box_properties = rectangle_box.asValueMap();
+    TMXObjectGroup* collisions_SOL = _tilemap->getObjectGroup("collision_SOL");
+    ValueVector& rectangle_array = collisions_SOL->getObjects();
+    for (cocos2d::Value& rectangle_box : rectangle_array) {
+        cocos2d::ValueMap rectangle_box_properties = rectangle_box.asValueMap();
 
-    //    Node* node = Node::create();
-    //    PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //    box->setCollisionBitmask(3);
-    //    box->setContactTestBitmask(true);
+        Node* node = Node::create();
+        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+        box->setCollisionBitmask(3);
+        box->setContactTestBitmask(true);
 
-    //    node->setPhysicsBody(box);
+        node->setPhysicsBody(box);
 
-    //    //box->setGroup(-1);
-    //   
+        //box->setGroup(-1);
+       
 
-    //    node->setPosition(Vec2(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / rectangle_box_properties["height"].asInt() *14, rectangle_box_properties["y"].asInt() + rectangle_box_properties["width"].asInt() / rectangle_box_properties["height"].asInt() ));
-    //    box->setGravityEnable(false);
-    //    box->setDynamic(false);
+        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //    this->addChild(node, 20);
-    //}
+        box->setGravityEnable(false);
+        box->setDynamic(false);
+
+        this->addChild(node, 20);
+    }
 
     spawnEevee();
 
@@ -87,7 +87,7 @@ bool LevelOne::init()
 }
 
 void LevelOne::spawnEevee() {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
+    /*auto visibleSize = Director::getInstance()->getVisibleSize();
     visibleSize.setSize(visibleSize.width, 1500);
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto edgebody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(0.0f, 0.2f, 0.1f), 3);
@@ -104,11 +104,11 @@ void LevelOne::spawnEevee() {
     edgenode2->setPosition(Point(visibleSize.width / 4 + origin.x, visibleSize.height / 2 + origin.y));
     edgenode2->setPhysicsBody(edgebody2);
     edgebody2->setCollisionBitmask(3);
-    edgebody2->setContactTestBitmask(true);
+    edgebody2->setContactTestBitmask(true);*/
     
 
-    this->addChild(edgenode);
-    this->addChild(edgenode2);
+    /*this->addChild(edgenode);
+    this->addChild(edgenode2);*/
         
     Sprite* eeveeSprite = nullptr;
     for (size_t i = 0; i < 7; i++)
