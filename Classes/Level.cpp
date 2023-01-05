@@ -9,13 +9,13 @@ void Level::update(float delta) {
 }
 
 void Level::increaseSpeed() {
-    if (_speed != 100) {
-        _speed = _speed + 25;
+    if (_speed != 550) {
+        _speed = _speed + 250;
     }
 }
 void Level::decreaseSpeed() {
-    if (_speed != 0) {
-        _speed = _speed - 25;
+    if (_speed != 50) {
+        _speed = _speed - 250;
     }
 }
 
