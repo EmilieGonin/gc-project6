@@ -150,7 +150,7 @@ void Level::createMenu(int powers[]) {
 
     Sprite* power = nullptr;
     Label* counter = nullptr;
-    for(int i = 0; i < myPowers->size(); i++)
+    for(int i = 0; i < myPowers->size() + 1; i++)
     {
         //create level inventory
         _powersInventory[i] = powers[i];
