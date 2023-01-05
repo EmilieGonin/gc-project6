@@ -18,7 +18,6 @@ Eevee::Eevee(Sprite* sprite, int id) {
 };
 Eevee::~Eevee() {};
 
-
 Vector<SpriteFrame*> Eevee::getAnimation(const char* format, int count)
 {
     auto spritecache = SpriteFrameCache::getInstance();
@@ -51,13 +50,19 @@ void Eevee::update(float delta, int speed) {
     position.x -= _pas * speed * delta;
     _sprite->setPosition(position);
 
-    if (_skill == 1) {
+    if (_skill == 1) { //Flareon
         _sprite->setColor(Color3B::RED);
     }
-    else if (_skill == 2) {
+    else if (_skill == 2) { //Vaporeon
         _sprite->setColor(Color3B::BLUE);
     }
-    else if (_skill == 3) {
+    else if (_skill == 3) { //Jolteon
+        _sprite->setColor(Color3B::YELLOW);
+    }
+    else if (_skill == 4) { //Glaceon
+        _sprite->setColor(Color3B::MAGENTA);
+    }
+    else if (_skill == 5) { //Leafeon
         _sprite->setColor(Color3B::GREEN);
     }
     else {

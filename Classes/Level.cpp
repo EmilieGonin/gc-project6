@@ -146,7 +146,7 @@ void Level::spawnEevee(int number) {
 void Level::createMenu(int powers[]) {
 
     std::string path = "interface/";
-    std::string myPowers[5] = { "pyro","feuille","givre","aqua","volt" };
+    std::string myPowers[5] = { "pyro","aqua","volt","givre","feuille" };
 
 
     Sprite* menu = Sprite::create("interface/interface.png");

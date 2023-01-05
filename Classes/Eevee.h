@@ -25,7 +25,7 @@ public:
 	void update(float, int);
 	bool isTouched(Vec2);
 
-	//0 = None, 1 = Flareon, 2 = Glaceon, 3 = Leafeon
+	//0 = None, 1 = Flareon, 2 = Vaporeon, 3 = Jolteon, 4 = Glaceon, 5 = Leafeon
 	void useSkill(int);
 
 	//Getters
