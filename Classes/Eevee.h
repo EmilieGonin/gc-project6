@@ -13,7 +13,7 @@ protected:
 	Animation* _animation;
 	Animate* _animate;
 
-	int _direction, _skill, _id, _pas;
+	int _direction, _skill, _id, _pas, _formerPas;
 
 public:
 	Eevee(Sprite*, int);
@@ -31,8 +31,10 @@ public:
 	//Getters
 	Sprite* getSprite();
 	Animate* getAnimate();
+	int getFormerPas();
 	int getId();
 
 	//Setters
 	void setSkill(int);
+	void setPas(int);
 };
