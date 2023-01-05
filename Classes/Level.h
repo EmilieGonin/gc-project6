@@ -13,7 +13,7 @@ protected:
 	std::vector<Label*> _labels;
 	int _powers[4];
 
-	//Speed : 25 (slow), 50 (normal), 75 (fast) 100 (fastest)
+	//Speed : 50 (normal), 300 (fast) 550 (fastest)
 	int _speed = 50;
 
 public:
