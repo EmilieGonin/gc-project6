@@ -41,7 +41,7 @@ void Level::spawnEevee(int number) {
         Vec2 myAnchorPoint(0.5, 0.5);
         eeveeSprite->setAnchorPoint(myAnchorPoint);
 
-        PhysicsBody* physicsBody = PhysicsBody::createBox(Size(eeveeSprite->getContentSize().width, eeveeSprite->getContentSize().height),
+        PhysicsBody* physicsBody = PhysicsBody::createBox(Size(eeveeSprite->getContentSize().width / 2, eeveeSprite->getContentSize().height / 2),
             PhysicsMaterial(0.0f, 0.0f, 0.0f));
         physicsBody->setDynamic(true);
         physicsBody->setCollisionBitmask(1);
@@ -111,7 +111,51 @@ void Level::spawnEevee(int number) {
 //
 //}
 
+void Level::createMenu() {
 
+    std::string path = "interface/";
+    std::string myPowers[5] = { "pyro","feuille","givre","aqua","volt" };
+
+
+    Sprite* menu = Sprite::create("interface/interface.png");
+    menu->setScale(1, 1);
+    menu->setAnchorPoint(Vec2::ZERO);
+    menu->setPosition(0, 0);
+    this->addChild(menu);
+
+
+    Sprite* power = nullptr;
+    for(int i = 0; i < 5 ; i++)
+    {
+
+
+        power = Sprite::create(path + myPowers[i] + ".png");
+        power->setScale(1, 1);
+        power->setAnchorPoint(Vec2::ZERO);
+        power->setPosition(450 +i * 100, 50);
+        this->addChild(power,5);
+        _myPowers.push_back(power);
+    }
+ 
+    _reset = Sprite::create("interface/reset.png");
+    _reset->setScale(0.35, 0.35);
+    _reset->setAnchorPoint(Vec2::ZERO);
+    _reset->setPosition(1250, 50);
+    this->addChild(_reset,5);
+
+    _fastFor = Sprite::create("interface/reset.png");
+    _fastFor->setScale(0.35, 0.35);
+    _fastFor->setAnchorPoint(Vec2::ZERO);
+    _fastFor->setPosition(1350, 50);
+    this->addChild(_fastFor,5);
+
+    _slowFor = Sprite::create("interface/reset.png");
+    _slowFor->setScale(0.35, 0.35);
+    _slowFor->setAnchorPoint(Vec2::ZERO);
+    _slowFor->setPosition(1450, 50);
+    this->addChild(_slowFor,5);
+
+}
 void Level::createMap(TMXTiledMap* tilemap) {
 
     TMXObjectGroup* collisions_SOL = tilemap->getObjectGroup("collision_SOL");
@@ -169,7 +213,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(2);
+        box->setCollisionBitmask(1);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -193,7 +237,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(2);
+        box->setCollisionBitmask(1);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -217,7 +261,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(2);
+        box->setCollisionBitmask(3);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -241,7 +285,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(2);
+        box->setCollisionBitmask(1);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -265,7 +309,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(2);
+        box->setCollisionBitmask(1);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
