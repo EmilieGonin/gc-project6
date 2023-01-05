@@ -43,7 +43,7 @@ void Level::handleEvent(Event* event) {
         {
             Eevee* eevee = _eevings[i];
 
-            if (isTouched(eevee->getSprite()) && _skillSelected) {
+            if (isTouched(eevee->getSprite()) && _skillSelected && !eevee->getSkill()) {
                 if (_powersInventory[_skillSelected - 1]) {
                     eevee->setSkill(_skillSelected);
                     _powersInventory[_skillSelected - 1]--;
