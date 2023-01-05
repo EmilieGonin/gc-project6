@@ -81,18 +81,16 @@ bool Eevee::isTouched(Vec2 position) {
 }
 
 void Eevee::collide() {
-    
-     /*   log("je collide my tag %d %d", contact.getShapeB()->getBody()->getTag(), getId());*/
-            if (this->_sprite->getScaleX() == 2)
-            {
-                this->_sprite->setScaleX(-2);
-                _pas *= -1;
-            }
-            else
-            {
-                this->_sprite->setScaleX(2);
-                _pas *= -1;
-            }
+    if (this->_sprite->getScaleX() == 2)
+    {
+        this->_sprite->setScaleX(-2);
+        _pas *= -1;
+    }
+    else
+    {
+        this->_sprite->setScaleX(2);
+        _pas *= -1;
+    }
 }
 
 //Getters
