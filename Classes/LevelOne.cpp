@@ -89,28 +89,16 @@ bool LevelOne::init()
 }
 
 void LevelOne::spawnEevee() {
-    /*auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto visibleSize = Director::getInstance()->getVisibleSize();
     visibleSize.setSize(visibleSize.width, 1500);
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto edgebody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(0.0f, 0.2f, 0.1f), 3);
     auto edgenode = Node::create();
-    edgenode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 4+ origin.y));
+    edgenode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2+ origin.y));
     edgenode->setPhysicsBody(edgebody);
     edgebody->setCollisionBitmask(2);
     edgebody->setContactTestBitmask(true);
-
-
-    visibleSize.setSize(1500, visibleSize.height);
-    auto edgebody2 = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(0.0f, 0.0f, 0.1f), 3);
-    auto edgenode2 = Node::create();
-    edgenode2->setPosition(Point(visibleSize.width / 4 + origin.x, visibleSize.height / 2 + origin.y));
-    edgenode2->setPhysicsBody(edgebody2);
-    edgebody2->setCollisionBitmask(3);
-    edgebody2->setContactTestBitmask(true);*/
-    
-
-    /*this->addChild(edgenode);
-    this->addChild(edgenode2);*/
+    this->addChild(edgenode);
         
     Sprite* eeveeSprite = nullptr;
     for (size_t i = 0; i < 7; i++)
@@ -118,7 +106,7 @@ void LevelOne::spawnEevee() {
         cocos2d::log("eevee created");
         eeveeSprite = Sprite::create("sprites/0000.png");
         eeveeSprite->setScale(2, 2);
-        eeveeSprite->setPosition(100 + i * 50, 100);
+        eeveeSprite->setPosition(1500 + i * 50, 1000);
         Vec2 myAnchorPoint(0.5, 0.5);
         eeveeSprite->setAnchorPoint(myAnchorPoint);
         
@@ -128,6 +116,7 @@ void LevelOne::spawnEevee() {
         physicsBody->setCollisionBitmask(1);
         physicsBody->setContactTestBitmask(true);
         physicsBody->setTag(i);
+        physicsBody->setRotationEnable(false);
         
         
         
