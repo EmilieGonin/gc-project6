@@ -6,6 +6,18 @@ void Level::update(float delta) {
         Eevee* eevee = this->_eevings[i];
         eevee->update(delta, _speed);
     }
+
+    if (_powers.size() && _skillSelected) {
+        for (size_t i = 0; i < _powers.size(); i++)
+        {
+            if (i == _skillSelected - 1) {
+                _powers[i]->setColor(Color3B::RED);
+            }
+            else {
+                _powers[i]->setColor(Color3B::WHITE);
+            }
+        }
+    }
 }
 
 void Level::handleEvent(Event* event) {
