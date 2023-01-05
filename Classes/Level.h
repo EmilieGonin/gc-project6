@@ -16,21 +16,25 @@ protected:
 	int _currentLevel = 0;
 	std::vector<Eevee*> _eevings;
 	std::vector<Label*> _labels;
-	int _powers[5];
-	std::vector<Sprite*> _myPowers;
+	int _powersInventory[5];
+	std::vector<Sprite*> _powers;
 	Sprite* _fastFor;
 	Sprite* _slowFor;
 	Sprite* _reset;
 	std::vector<Scene*> _myLevels;
 	//Speed : 50 (normal), 300 (fast) 550 (fastest)
 	int _speed = 50;
+	int _skillSelected;
+	Vec2 _mousePosition;
 
 public:
 	void createMap(TMXTiledMap* tilemap);
 	void update(float) override;
+	void handleEvent(Event*);
 	void spawnEevee(int);
 	void createMenu();
 	void getAllLevels();
+	bool isTouched(Sprite*);
 	//void MouseUp(cocos2d::Event* event);
 
 	//Setters

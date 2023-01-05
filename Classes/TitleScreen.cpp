@@ -59,15 +59,13 @@ bool TitleScreen::init()
 }
 
 void TitleScreen::MouseUp(Event* event) {
-    EventMouse* e = (EventMouse*)event;
-    int button = int(e->getMouseButton());
-  
-    Vec2 mousePosition = e->getLocationInView();
+    handleEvent(event);
+ 
     Rect menuBounds = _menuScreen->getBoundingBox();
     Rect startBounds = this->start->getBoundingBox();
     Rect quitBounds = this->quit->getBoundingBox();
    
-    if (startBounds.containsPoint(mousePosition)) {
+    if (startBounds.containsPoint(_mousePosition)) {
         cocos2d::log("menu touched %d" , _myLevels.size());
         
         auto director = Director::getInstance();
@@ -75,7 +73,7 @@ void TitleScreen::MouseUp(Event* event) {
 
         director->replaceScene(scene);
     }
-    if (quitBounds.containsPoint(mousePosition)) {
+    if (quitBounds.containsPoint(_mousePosition)) {
    
         auto director = Director::getInstance();
         director->end();

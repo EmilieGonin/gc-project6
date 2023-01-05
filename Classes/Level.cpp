@@ -6,6 +6,63 @@ void Level::update(float delta) {
         Eevee* eevee = this->_eevings[i];
         eevee->update(delta, _speed);
     }
+
+    if (_powers.size() && _skillSelected) {
+        for (size_t i = 0; i < _powers.size(); i++)
+        {
+            if (i == _skillSelected - 1) {
+                _powers[i]->setColor(Color3B::RED);
+            }
+            else {
+                _powers[i]->setColor(Color3B::WHITE);
+            }
+        }
+    }
+}
+
+void Level::handleEvent(Event* event) {
+    EventMouse* e = (EventMouse*)event;
+    _mousePosition = e->getLocationInView();
+
+    if (_powers.size()) {
+        for (size_t i = 0; i < _powers.size(); i++)
+        {
+            Sprite* power = _powers[i];
+
+            if (isTouched(power)) {
+                _skillSelected = i + 1;
+            }
+        }
+    }
+
+    if (_eevings.size()) {
+        for (size_t i = 0; i < _eevings.size(); i++)
+        {
+            Eevee* eevee = _eevings[i];
+
+            if (isTouched(eevee->getSprite()) && _skillSelected) {
+                if (_powersInventory[_skillSelected - 1]) {
+                    eevee->setSkill(_skillSelected);
+                    _powersInventory[_skillSelected - 1]--;
+                    _skillSelected = 0;
+                }
+                else {
+                    cocos2d::log("power not available");
+                }
+            }
+        }
+    }
+}
+
+bool Level::isTouched(Sprite* sprite) {
+    Rect bounds = sprite->getBoundingBox();
+
+    if (bounds.containsPoint(_mousePosition)) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void Level::increaseSpeed() {
@@ -134,7 +191,7 @@ void Level::createMenu() {
         power->setAnchorPoint(Vec2::ZERO);
         power->setPosition(450 +i * 100, 50);
         this->addChild(power,5);
-        _myPowers.push_back(power);
+        _powers.push_back(power);
     }
  
     _reset = Sprite::create("interface/reset.png");
