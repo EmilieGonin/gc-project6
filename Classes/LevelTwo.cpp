@@ -24,13 +24,13 @@ bool LevelTwo::init()
     }
     
     //powers inventory
-    /*collisionType.clear();
-    collisionType.push_back(2);
-    collisionType.push_back(1);
+    collisionType.clear();
     collisionType.push_back(2);
     collisionType.push_back(2);
+    collisionType.push_back(3);
+    collisionType.push_back(3);
     collisionType.push_back(2);
-    collisionType.push_back(2);*/
+    collisionType.push_back(2);
 
 
     _xSpawn = 400;

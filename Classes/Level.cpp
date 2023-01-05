@@ -214,7 +214,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
         box->setContactTestBitmask(true);
-        box->setCollisionBitmask(2);
+        box->setCollisionBitmask(collisionType[0]);
        
 
         node->setPhysicsBody(box);
@@ -231,262 +231,260 @@ void Level::createMap(TMXTiledMap* tilemap) {
         this->addChild(node, 20);
     }
 
-    //TMXObjectGroup* collisions_BAR2 = tilemap->getObjectGroup("collision_BARREL_2");
-    //ValueVector& rectangle_array_BAR2 = collisions_BAR2->getObjects();
-    //for (cocos2d::Value& rectangle_box_BAR2 : rectangle_array_BAR2) {
-    //    cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR2.asValueMap();
+    TMXObjectGroup* collisions_BAR2 = tilemap->getObjectGroup("collision_BARREL_2");
+    ValueVector& rectangle_array_BAR2 = collisions_BAR2->getObjects();
+    for (cocos2d::Value& rectangle_box_BAR2 : rectangle_array_BAR2) {
+        cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR2.asValueMap();
 
-    //    Node* node = Node::create();
-    //    PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //    box->setCollisionBitmask(1);
-    //    box->setContactTestBitmask(true);
+        Node* node = Node::create();
+        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+        box->setCollisionBitmask(collisionType[1]);
+        box->setContactTestBitmask(true);
 
-    //    node->setPhysicsBody(box);
+        node->setPhysicsBody(box);
 
-    //    //box->setGroup(-1);
+        //box->setGroup(-1);
 
 
-    //    node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //    node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //    box->setGravityEnable(false);
-    //    box->setDynamic(false);
+        box->setGravityEnable(false);
+        box->setDynamic(false);
 
-    //    this->addChild(node, 20);
-    //}
+        this->addChild(node, 20);
+    }
 
-    //TMXObjectGroup* collisions_BAR3 = tilemap->getObjectGroup("collision_BARREL_3");
-    //ValueVector& rectangle_array_BAR3 = collisions_BAR3->getObjects();
-    //for (cocos2d::Value& rectangle_box_BAR3 : rectangle_array_BAR3) {
-    //    cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR3.asValueMap();
+    TMXObjectGroup* collisions_BAR3 = tilemap->getObjectGroup("collision_BARREL_3");
+    ValueVector& rectangle_array_BAR3 = collisions_BAR3->getObjects();
+    for (cocos2d::Value& rectangle_box_BAR3 : rectangle_array_BAR3) {
+        cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR3.asValueMap();
 
-    //    Node* node = Node::create();
-    //    PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //    box->setCollisionBitmask(1);
-    //    box->setContactTestBitmask(true);
+        Node* node = Node::create();
+        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+        box->setCollisionBitmask(collisionType[2]);
+        box->setContactTestBitmask(true);
 
-    //    node->setPhysicsBody(box);
+        node->setPhysicsBody(box);
 
-    //    //box->setGroup(-1);
+        //box->setGroup(-1);
 
 
-    //    node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //    node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //    box->setGravityEnable(false);
-    //    box->setDynamic(false);
+        box->setGravityEnable(false);
+        box->setDynamic(false);
 
-    //    this->addChild(node, 20);
-    //}
+        this->addChild(node, 20);
+    }
 
-    //TMXObjectGroup* collisions_BAR4 = tilemap->getObjectGroup("collision_BARREL_4");
-    //ValueVector& rectangle_array_BAR4 = collisions_BAR4->getObjects();
-    //for (cocos2d::Value& rectangle_box_BAR4 : rectangle_array_BAR4) {
-    //    cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR4.asValueMap();
+    TMXObjectGroup* collisions_BAR4 = tilemap->getObjectGroup("collision_BARREL_4");
+    ValueVector& rectangle_array_BAR4 = collisions_BAR4->getObjects();
+    for (cocos2d::Value& rectangle_box_BAR4 : rectangle_array_BAR4) {
+        cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR4.asValueMap();
 
-    //    Node* node = Node::create();
-    //    PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //    box->setCollisionBitmask(1);
-    //    box->setContactTestBitmask(true);
+        Node* node = Node::create();
+        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+        box->setCollisionBitmask(collisionType[3]);
+        box->setContactTestBitmask(true);
 
-    //    node->setPhysicsBody(box);
+        node->setPhysicsBody(box);
 
-    //    //box->setGroup(-1);
+        //box->setGroup(-1);
 
 
-    //    node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //    node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //    box->setGravityEnable(false);
-    //    box->setDynamic(false);
+        box->setGravityEnable(false);
+        box->setDynamic(false);
 
-    //    this->addChild(node, 20);
-    //}
+        this->addChild(node, 20);
+    }
 
-    //TMXObjectGroup* collisions_BAR5 = tilemap->getObjectGroup("collision_BARREL_5");
-    //ValueVector& rectangle_array_BAR5 = collisions_BAR5->getObjects();
-    //for (cocos2d::Value& rectangle_box_BAR5 : rectangle_array_BAR5) {
-    //    cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR5.asValueMap();
+    TMXObjectGroup* collisions_BAR5 = tilemap->getObjectGroup("collision_BARREL_5");
+    ValueVector& rectangle_array_BAR5 = collisions_BAR5->getObjects();
+    for (cocos2d::Value& rectangle_box_BAR5 : rectangle_array_BAR5) {
+        cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR5.asValueMap();
 
-    //    Node* node = Node::create();
-    //    PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //    box->setCollisionBitmask(1);
-    //    box->setContactTestBitmask(true);
+        Node* node = Node::create();
+        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+        box->setCollisionBitmask(collisionType[4]);
+        box->setContactTestBitmask(true);
 
-    //    node->setPhysicsBody(box);
+        node->setPhysicsBody(box);
+            //box->setGroup(-1);
 
-    //    //box->setGroup(-1);
 
+        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //    node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //    node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+        box->setGravityEnable(false);
+        box->setDynamic(false);
 
-    //    box->setGravityEnable(false);
-    //    box->setDynamic(false);
+        this->addChild(node, 20);
+    }
 
-    //    this->addChild(node, 20);
-    //}
+    TMXObjectGroup* collisions_BAR6 = tilemap->getObjectGroup("collision_BARREL_6");
+    if (tilemap->getObjectGroup("collision_BARREL_6") != NULL)
+    {
+        ValueVector& rectangle_array_BAR6 = collisions_BAR6->getObjects();
+        for (cocos2d::Value& rectangle_box_BAR6 : rectangle_array_BAR6) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR6.asValueMap();
 
-    //TMXObjectGroup* collisions_BAR6 = tilemap->getObjectGroup("collision_BARREL_6");
-    //if (tilemap->getObjectGroup("collision_BARREL_6") != NULL)
-    //{
-    //    ValueVector& rectangle_array_BAR6 = collisions_BAR6->getObjects();
-    //    for (cocos2d::Value& rectangle_box_BAR6 : rectangle_array_BAR6) {
-    //        cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR6.asValueMap();
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(collisionType[5]);
+            box->setContactTestBitmask(true);
 
-    //        Node* node = Node::create();
-    //        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //        box->setCollisionBitmask(1);
-    //        box->setContactTestBitmask(true);
+            node->setPhysicsBody(box);
 
-    //        node->setPhysicsBody(box);
+            //box->setGroup(-1);
 
-    //        //box->setGroup(-1);
 
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+            box->setGravityEnable(false);
+            box->setDynamic(false);
 
-    //        box->setGravityEnable(false);
-    //        box->setDynamic(false);
+            this->addChild(node, 20);
+        }
+    }
 
-    //        this->addChild(node, 20);
-    //    }
-    //}
+    TMXObjectGroup* collisions_WIN = tilemap->getObjectGroup("WIN");
+    ValueVector& rectangle_array_WIN = collisions_WIN->getObjects();
+    for (cocos2d::Value& rectangle_box_WIN : rectangle_array_WIN) {
+        cocos2d::ValueMap rectangle_box_properties = rectangle_box_WIN.asValueMap();
 
-    //TMXObjectGroup* collisions_WIN = tilemap->getObjectGroup("WIN");
-    //ValueVector& rectangle_array_WIN = collisions_WIN->getObjects();
-    //for (cocos2d::Value& rectangle_box_WIN : rectangle_array_WIN) {
-    //    cocos2d::ValueMap rectangle_box_properties = rectangle_box_WIN.asValueMap();
+        Node* node = Node::create();
+        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+        box->setCollisionBitmask(7);
+        box->setContactTestBitmask(true);
 
-    //    Node* node = Node::create();
-    //    PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //    box->setCollisionBitmask(7);
-    //    box->setContactTestBitmask(true);
+        node->setPhysicsBody(box);
 
-    //    node->setPhysicsBody(box);
+        //box->setGroup(-1);
 
-    //    //box->setGroup(-1);
 
+        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //    node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //    node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+        box->setGravityEnable(false);
+        box->setDynamic(false);
 
-    //    box->setGravityEnable(false);
-    //    box->setDynamic(false);
+        this->addChild(node, 20);
+    }
 
-    //    this->addChild(node, 20);
-    //}
+    TMXObjectGroup* collisions_FREEZE_1 = tilemap->getObjectGroup("collision_FREEZE_1");
+    if (tilemap->getObjectGroup("collision_FREEZE_1") != NULL)
+    {
+        ValueVector& rectangle_array_FREEZE_1 = collisions_FREEZE_1->getObjects();
 
-    //TMXObjectGroup* collisions_FREEZE_1 = tilemap->getObjectGroup("collision_FREEZE_1");
-    //if (tilemap->getObjectGroup("collision_FREEZE_1") != NULL)
-    //{
-    //    ValueVector& rectangle_array_FREEZE_1 = collisions_FREEZE_1->getObjects();
+        for (cocos2d::Value& rectangle_box_FREEZE_1 : rectangle_array_FREEZE_1) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_1.asValueMap();
 
-    //    for (cocos2d::Value& rectangle_box_FREEZE_1 : rectangle_array_FREEZE_1) {
-    //        cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_1.asValueMap();
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
 
-    //        Node* node = Node::create();
-    //        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //        box->setCollisionBitmask(3);
-    //        box->setContactTestBitmask(true);
+            node->setPhysicsBody(box);
 
-    //        node->setPhysicsBody(box);
+            //box->setGroup(-1);
 
-    //        //box->setGroup(-1);
 
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+            box->setGravityEnable(false);
+            box->setDynamic(false);
 
-    //        box->setGravityEnable(false);
-    //        box->setDynamic(false);
+            this->addChild(node, 20);
+        }
+    }
 
-    //        this->addChild(node, 20);
-    //    }
-    //}
+    TMXObjectGroup* collisions_FREEZE_2 = tilemap->getObjectGroup("collision_FREEZE_2");
+    if(tilemap->getObjectGroup("collision_FREEZE_2") != NULL)
+    {
+        ValueVector& rectangle_array_FREEZE_2 = collisions_FREEZE_2->getObjects();
+        for (cocos2d::Value& rectangle_box_FREEZE_2 : rectangle_array_FREEZE_2) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_2.asValueMap();
 
-    //TMXObjectGroup* collisions_FREEZE_2 = tilemap->getObjectGroup("collision_FREEZE_2");
-    //if(tilemap->getObjectGroup("collision_FREEZE_2") != NULL)
-    //{
-    //    ValueVector& rectangle_array_FREEZE_2 = collisions_FREEZE_2->getObjects();
-    //    for (cocos2d::Value& rectangle_box_FREEZE_2 : rectangle_array_FREEZE_2) {
-    //        cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_2.asValueMap();
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
 
-    //        Node* node = Node::create();
-    //        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //        box->setCollisionBitmask(3);
-    //        box->setContactTestBitmask(true);
+            node->setPhysicsBody(box);
 
-    //        node->setPhysicsBody(box);
+            //box->setGroup(-1);
 
-    //        //box->setGroup(-1);
 
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+            box->setGravityEnable(false);
+            box->setDynamic(false);
 
-    //        box->setGravityEnable(false);
-    //        box->setDynamic(false);
+            this->addChild(node, 20);
+        }
+    }
 
-    //        this->addChild(node, 20);
-    //    }
-    //}
+    TMXObjectGroup* collisions_FREEZE_3 = tilemap->getObjectGroup("collision_FREEZE_3");
+    if(tilemap->getObjectGroup("collision_FREEZE_3") != NULL)
+    {
+        ValueVector& rectangle_array_FREEZE_3 = collisions_FREEZE_3->getObjects();
+        for (cocos2d::Value& rectangle_box_FREEZE_3 : rectangle_array_FREEZE_3) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_3.asValueMap();
+                    Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
 
-    //TMXObjectGroup* collisions_FREEZE_3 = tilemap->getObjectGroup("collision_FREEZE_3");
-    //if(tilemap->getObjectGroup("collision_FREEZE_3") != NULL)
-    //{
-    //    ValueVector& rectangle_array_FREEZE_3 = collisions_FREEZE_3->getObjects();
-    //    for (cocos2d::Value& rectangle_box_FREEZE_3 : rectangle_array_FREEZE_3) {
-    //        cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_3.asValueMap();
+            node->setPhysicsBody(box);
 
-    //        Node* node = Node::create();
-    //        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //        box->setCollisionBitmask(3);
-    //        box->setContactTestBitmask(true);
+            //box->setGroup(-1);
 
-    //        node->setPhysicsBody(box);
 
-    //        //box->setGroup(-1);
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
+            box->setGravityEnable(false);
+            box->setDynamic(false);
 
-    //        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
-
-    //        box->setGravityEnable(false);
-    //        box->setDynamic(false);
-
-    //        this->addChild(node, 20);
+            this->addChild(node, 20);
   
-    //    }
-    //}
+        }
+    }
 
-    //TMXObjectGroup* WATER = tilemap->getObjectGroup("WATER");
-    //if(tilemap->getObjectGroup("WATER") != NULL)
-    //{
-    //    ValueVector& rectangle_array_WATER = WATER->getObjects();
-    //    for (cocos2d::Value& rectangle_box_WATER : rectangle_array_WATER) {
-    //        cocos2d::ValueMap rectangle_box_properties = rectangle_box_WATER.asValueMap();
+    TMXObjectGroup* WATER = tilemap->getObjectGroup("WATER");
+    if(tilemap->getObjectGroup("WATER") != NULL)
+    {
+        ValueVector& rectangle_array_WATER = WATER->getObjects();
+        for (cocos2d::Value& rectangle_box_WATER : rectangle_array_WATER) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_WATER.asValueMap();
 
-    //        Node* node = Node::create();
-    //        PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-    //        box->setCollisionBitmask(3);
-    //        box->setContactTestBitmask(true);
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
 
-    //        node->setPhysicsBody(box);
+            node->setPhysicsBody(box);
 
-    //        //box->setGroup(-1);
+            //box->setGroup(-1);
 
 
-    //        node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
-    //        node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
 
-    //        box->setGravityEnable(false);
-    //        box->setDynamic(false);
+            box->setGravityEnable(false);
+            box->setDynamic(false);
 
-    //        this->addChild(node, 20);
-    //    }
-    //}
+            this->addChild(node, 20);
+        }
+    }
 
 
 }
