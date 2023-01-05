@@ -109,7 +109,7 @@ void Level::spawnEevee(int number) {
         cocos2d::log("eevee created");
         eeveeSprite = Sprite::create("sprites/0000.png");
         eeveeSprite->setScale(2, 2);
-        eeveeSprite->setPosition(550, 950);
+        eeveeSprite->setPosition(_xSpawn, _ySpawn);
         Vec2 myAnchorPoint(0.5, 0.5);
         eeveeSprite->setAnchorPoint(myAnchorPoint);
 
@@ -229,7 +229,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
         
         box->setContactTestBitmask(true);
-        box->setCollisionBitmask(8);
+        box->setCollisionBitmask(2);
         node->setPhysicsBody(box);
 
         //box->setGroup(-1);
@@ -251,8 +251,9 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(1);
         box->setContactTestBitmask(true);
+        box->setCollisionBitmask(collisionType[0]);
+       
 
         node->setPhysicsBody(box);
 
@@ -275,7 +276,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(1);
+        box->setCollisionBitmask(collisionType[1]);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -299,7 +300,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(3);
+        box->setCollisionBitmask(collisionType[2]);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -323,7 +324,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(1);
+        box->setCollisionBitmask(collisionType[3]);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -347,12 +348,11 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(1);
+        box->setCollisionBitmask(collisionType[4]);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
-
-        //box->setGroup(-1);
+            //box->setGroup(-1);
 
 
         node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
@@ -362,6 +362,33 @@ void Level::createMap(TMXTiledMap* tilemap) {
         box->setDynamic(false);
 
         this->addChild(node, 20);
+    }
+
+    TMXObjectGroup* collisions_BAR6 = tilemap->getObjectGroup("collision_BARREL_6");
+    if (tilemap->getObjectGroup("collision_BARREL_6") != NULL)
+    {
+        ValueVector& rectangle_array_BAR6 = collisions_BAR6->getObjects();
+        for (cocos2d::Value& rectangle_box_BAR6 : rectangle_array_BAR6) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR6.asValueMap();
+
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(collisionType[5]);
+            box->setContactTestBitmask(true);
+
+            node->setPhysicsBody(box);
+
+            //box->setGroup(-1);
+
+
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+
+            box->setGravityEnable(false);
+            box->setDynamic(false);
+
+            this->addChild(node, 20);
+        }
     }
 
     TMXObjectGroup* collisions_WIN = tilemap->getObjectGroup("WIN");
@@ -371,7 +398,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-        box->setCollisionBitmask(2);
+        box->setCollisionBitmask(7);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
@@ -388,4 +415,198 @@ void Level::createMap(TMXTiledMap* tilemap) {
         this->addChild(node, 20);
     }
 
+    TMXObjectGroup* collisions_FREEZE_1 = tilemap->getObjectGroup("collision_FREEZE_1");
+    if (tilemap->getObjectGroup("collision_FREEZE_1") != NULL)
+    {
+        ValueVector& rectangle_array_FREEZE_1 = collisions_FREEZE_1->getObjects();
+
+        for (cocos2d::Value& rectangle_box_FREEZE_1 : rectangle_array_FREEZE_1) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_1.asValueMap();
+
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
+
+            node->setPhysicsBody(box);
+
+            //box->setGroup(-1);
+
+
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+
+            box->setGravityEnable(false);
+            box->setDynamic(false);
+
+            this->addChild(node, 20);
+        }
+    }
+
+    TMXObjectGroup* collisions_FREEZE_2 = tilemap->getObjectGroup("collision_FREEZE_2");
+    if(tilemap->getObjectGroup("collision_FREEZE_2") != NULL)
+    {
+        ValueVector& rectangle_array_FREEZE_2 = collisions_FREEZE_2->getObjects();
+        for (cocos2d::Value& rectangle_box_FREEZE_2 : rectangle_array_FREEZE_2) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_2.asValueMap();
+
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
+
+            node->setPhysicsBody(box);
+
+            //box->setGroup(-1);
+
+
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+
+            box->setGravityEnable(false);
+            box->setDynamic(false);
+
+            this->addChild(node, 20);
+        }
+    }
+
+    TMXObjectGroup* collisions_FREEZE_3 = tilemap->getObjectGroup("collision_FREEZE_3");
+    if(tilemap->getObjectGroup("collision_FREEZE_3") != NULL)
+    {
+        ValueVector& rectangle_array_FREEZE_3 = collisions_FREEZE_3->getObjects();
+        for (cocos2d::Value& rectangle_box_FREEZE_3 : rectangle_array_FREEZE_3) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_FREEZE_3.asValueMap();
+                    Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
+
+            node->setPhysicsBody(box);
+
+            //box->setGroup(-1);
+
+
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+
+            box->setGravityEnable(false);
+            box->setDynamic(false);
+
+            this->addChild(node, 20);
+  
+        }
+    }
+
+    TMXObjectGroup* WATER = tilemap->getObjectGroup("WATER");
+    if(tilemap->getObjectGroup("WATER") != NULL)
+    {
+        ValueVector& rectangle_array_WATER = WATER->getObjects();
+        for (cocos2d::Value& rectangle_box_WATER : rectangle_array_WATER) {
+            cocos2d::ValueMap rectangle_box_properties = rectangle_box_WATER.asValueMap();
+
+            Node* node = Node::create();
+            PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
+            box->setCollisionBitmask(3);
+            box->setContactTestBitmask(true);
+
+            node->setPhysicsBody(box);
+
+            //box->setGroup(-1);
+
+
+            node->setPositionX(rectangle_box_properties["x"].asInt() + rectangle_box_properties["width"].asInt() / 2);
+            node->setPositionY(rectangle_box_properties["y"].asInt() + rectangle_box_properties["height"].asInt() / 2);
+
+            box->setGravityEnable(false);
+            box->setDynamic(false);
+
+            this->addChild(node, 20);
+        }
+    }
+
+
+}
+
+bool Level::onContactBegin(PhysicsContact& contact) {
+
+
+    //("onContacftBegin %d %d", contact.getShapeA()->getBody()->getCollisionBitmask(), contact.getShapeB()->getBody()->getCollisionBitmask());
+
+    //log("my size %d", this->_eevings.size());
+    //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        //  collide avec mur
+        log("je collide avec wall %d ", this->_eevings[contact.getShapeB()->getBody()->getTag()]->getPas());
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
+    }
+
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+        //pour relancer la marche après une chute
+     
+            this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
+        
+    }
+
+
+    //EEVEE POWERS
+
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 4) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 4 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        //  collide avec water pour swim
+        // if eevee swimmeaon -> walk else die
+    }
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 5) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 5 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        //  collide avec "water but ice power
+        // if eevee glaceon -> enable collision
+    }
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 6) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 6 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        //  collide avec lever volteon
+        // if eevee == volteon -> activate lever
+    }
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 7) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 7 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        //  collide avec door 
+        //code pour detruire eevee et pour augmenter _savedEevings
+    }
+
+
+
+    if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
+        //pour transpercer
+        return false;
+    }
+    return true;
+}
+
+
+bool Level::onContactSeparate(PhysicsContact& contact) {
+   // log("onContactSeparate %d %d", contact.getShapeA()->getGroup(), contact.getShapeB()->getGroup());
+
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(0);
+
+        //stop moving wehn falling
+    }
+
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 4) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 4 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
+    }
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 5) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 5 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
+    }
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 6) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 6 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
+    }
+    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 7) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 7 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+
+        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
+    }
+
+    return true;
 }

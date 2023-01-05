@@ -12,7 +12,7 @@ USING_NS_CC;
 class Level : public cocos2d::Scene
 {
 protected:
-	int _savedEevings, _baseEevings;
+	int _savedEevings, _baseEevings, _xSpawn, _ySpawn;
 	int _currentLevel = 0;
 	std::vector<Eevee*> _eevings;
 	std::vector<Label*> _labels;
@@ -22,12 +22,17 @@ protected:
 	Sprite* _slowFor;
 	Sprite* _reset;
 	std::vector<Scene*> _myLevels;
+	std::vector<int> collisionType;
 	//Speed : 50 (normal), 300 (fast) 550 (fastest)
 	int _speed = 50;
 	int _skillSelected;
 	Vec2 _mousePosition;
 
 public:
+
+	bool onContactBegin(PhysicsContact&);
+	bool onContactSeparate(PhysicsContact&);
+
 	void createMap(TMXTiledMap* tilemap);
 	void update(float) override;
 	void handleEvent(Event*);
