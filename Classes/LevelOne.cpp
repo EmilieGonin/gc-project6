@@ -30,17 +30,11 @@ bool LevelOne::init()
         return false;
     }
 
-    //powers inventory
-    _powersInventory[0] = 2;
-    _powersInventory[1] = 0;
-    _powersInventory[2] = 0;
-    _powersInventory[3] = 0;
-    _powersInventory[4] = 0;
-
     auto _tilemap = TMXTiledMap::create("TuTo.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
-    createMenu();
+    int inventory[5] = { 2, 0 };
+    createMenu(inventory);
 
     /*_tilemap = new TMXTiledMap();
     _tilemap->initWithTMXFile("Map1.tmx");
