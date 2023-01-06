@@ -31,9 +31,9 @@ bool LevelOne::init()
     }
 
     collisionType.clear();
-    collisionType.push_back(3);
-    collisionType.push_back(3);
-    collisionType.push_back(3);
+    collisionType.push_back(1);
+    collisionType.push_back(1);
+    collisionType.push_back(1);
     collisionType.push_back(3);
     collisionType.push_back(2);
 

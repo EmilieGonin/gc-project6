@@ -19,6 +19,7 @@ protected:
 	std::vector<Sprite*> _powers;
 	int _powersInventory[5];
 	Label* _countdown;
+	Label* _eevingsTotal;
 
 	//Menu Buttons
 	Sprite* _fastFor;

@@ -13,6 +13,8 @@ Level::Level() {
 void Level::update(float delta) {
     if (_eevings.size())
     {
+        _eevingsTotal->setString(std::to_string(_savedEevings + _eevings.size()));
+
         for (size_t i = 0; i < _eevings.size(); i++)
         {
             Eevee* eevee = _eevings[i];
@@ -245,7 +247,7 @@ void Level::createMenu(int powers[]) {
     Sprite* menu = Sprite::create("interface/interface.png");
     menu->setScale(1, 1);
     menu->setAnchorPoint(Vec2::ZERO);
-    menu->setPosition(0, -50);
+    menu->setPosition(0, -45);
     this->addChild(menu);
 
     Sprite* power = nullptr;
@@ -258,7 +260,7 @@ void Level::createMenu(int powers[]) {
         power = Sprite::create(path + myPowers[i] + ".png");
         power->setScale(1, 1);
         power->setAnchorPoint(Vec2::ZERO);
-        power->setPosition(450 +i * 100, 25);
+        power->setPosition(450 +i * 100, 30);
 
         counter = Label::createWithTTF(std::to_string(_powersInventory[i]), "fonts/Hansip.otf", 25);
         power->addChild(counter);
@@ -270,20 +272,24 @@ void Level::createMenu(int powers[]) {
     _reset = Sprite::create("interface/reset.png");
     _reset->setScale(0.35, 0.35);
     _reset->setAnchorPoint(Vec2::ZERO);
-    _reset->setPosition(1250, 10);
+    _reset->setPosition(1250, 30);
     this->addChild(_reset,5);
 
     _fastFor = Sprite::create("interface/fastFor.png");
     _fastFor->setScale(0.35, 0.35);
     _fastFor->setAnchorPoint(Vec2::ZERO);
-    _fastFor->setPosition(1350, 10);
+    _fastFor->setPosition(1350, 30);
     this->addChild(_fastFor,5);
 
     _slowFor = Sprite::create("interface/slowFor.png");
     _slowFor->setScale(0.35, 0.35);
     _slowFor->setAnchorPoint(Vec2::ZERO);
-    _slowFor->setPosition(1450, 10);
+    _slowFor->setPosition(1450, 30);
     this->addChild(_slowFor,5);
+
+    _eevingsTotal = Label::createWithTTF(std::to_string(_savedEevings + _eevings.size()), "fonts/Hansip.otf", 50);
+    _eevingsTotal->setPosition(210, 40);
+    this->addChild(_eevingsTotal);
 }
 
 void Level::createMap(TMXTiledMap* tilemap) {
@@ -654,7 +660,7 @@ bool Level::onContactBegin(PhysicsContact& contact) {
                 return false;
             }
             else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7) || (a->getCollisionBitmask() == 7 && b->getCollisionBitmask() == 1)) {
-                //dgdgd
+                saved(b->getTag());
             }
 
             else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 8) || (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 1)) {
