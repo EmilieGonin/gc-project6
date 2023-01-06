@@ -245,7 +245,7 @@ void Level::createMenu(int powers[]) {
     Sprite* menu = Sprite::create("interface/interface.png");
     menu->setScale(1, 1);
     menu->setAnchorPoint(Vec2::ZERO);
-    menu->setPosition(0, 0);
+    menu->setPosition(0, -50);
     this->addChild(menu);
 
     Sprite* power = nullptr;
@@ -258,7 +258,7 @@ void Level::createMenu(int powers[]) {
         power = Sprite::create(path + myPowers[i] + ".png");
         power->setScale(1, 1);
         power->setAnchorPoint(Vec2::ZERO);
-        power->setPosition(450 +i * 100, 50);
+        power->setPosition(450 +i * 100, 25);
 
         counter = Label::createWithTTF(std::to_string(_powersInventory[i]), "fonts/Hansip.otf", 25);
         power->addChild(counter);
@@ -270,19 +270,19 @@ void Level::createMenu(int powers[]) {
     _reset = Sprite::create("interface/reset.png");
     _reset->setScale(0.35, 0.35);
     _reset->setAnchorPoint(Vec2::ZERO);
-    _reset->setPosition(1250, 50);
+    _reset->setPosition(1250, 10);
     this->addChild(_reset,5);
 
     _fastFor = Sprite::create("interface/fastFor.png");
     _fastFor->setScale(0.35, 0.35);
     _fastFor->setAnchorPoint(Vec2::ZERO);
-    _fastFor->setPosition(1350, 50);
+    _fastFor->setPosition(1350, 10);
     this->addChild(_fastFor,5);
 
     _slowFor = Sprite::create("interface/slowFor.png");
     _slowFor->setScale(0.35, 0.35);
     _slowFor->setAnchorPoint(Vec2::ZERO);
-    _slowFor->setPosition(1450, 50);
+    _slowFor->setPosition(1450, 10);
     this->addChild(_slowFor,5);
 }
 

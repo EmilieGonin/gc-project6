@@ -52,7 +52,7 @@ void Eevee::update(float delta, int speed) {
         _sprite->setColor(Color3B::BLUE);
     }
     else if (_skill == 3) { //Jolteon
-        _sprite->setColor(Color3B::YELLOW);
+        _sprite->setColor(Color3B::ORANGE);
     }
     else if (_skill == 4) { //Glaceon
         _sprite->setColor(Color3B::MAGENTA);
