@@ -6,7 +6,7 @@ class WinScreen : public Level
 {
 public:
     
-    static cocos2d::Scene* createScene();
+    static cocos2d::Scene* createScene(int,int);
     virtual bool init();
     CREATE_FUNC(WinScreen);
     void MouseUp(cocos2d::Event* event);

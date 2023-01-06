@@ -22,7 +22,7 @@ static void problemLoading(const char* filename)
 bool LevelOne::init()
 {
 
-    
+    _currentLevel = 0;
     //////////////////////////////
     // 1. super init first
     if ( !Scene::initWithPhysics() )
@@ -57,7 +57,8 @@ bool LevelOne::init()
     this->addChild(_tilemap);*/
 
     
-    _baseEevings = 10;
+    _baseEevings = 1;
+    _eevings.clear();
     spawnEevee(_baseEevings);
 
     EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
