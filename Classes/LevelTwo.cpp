@@ -34,15 +34,15 @@ bool LevelTwo::init()
     collisionType.push_back(2);
 
 
-    _xSpawn = 400;
-    _ySpawn = 1000;
+    _xSpawn = 835;
+    _ySpawn = 1050;
 
 
 
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
-    int inventory[5] = { 2, 2, 2, 2, 2};
+    int inventory[5] = { 2, 2, 2, 2, 10};
     createMenu(inventory);
 
     _baseEevings = 1;
