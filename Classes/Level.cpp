@@ -86,9 +86,9 @@ void Level::handleEvent(Event* event) {
                     cocos2d::log("power not available");
                 }
             }
-            else if (isTouched(eevee->getSprite())) {
+            /*else if (isTouched(eevee->getSprite())) {
                 kill(i);
-            }
+            }*/
         }
     }
 
