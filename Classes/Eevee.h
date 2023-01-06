@@ -27,6 +27,7 @@ public:
 
 	//0 = None, 1 = Flareon, 2 = Vaporeon, 3 = Jolteon, 4 = Glaceon, 5 = Leafeon
 	void useSkill(int);
+	Label* explosion(int);
 
 	//Getters
 	Sprite* getSprite();
