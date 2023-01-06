@@ -57,7 +57,7 @@ bool LevelOne::init()
     this->addChild(_tilemap);*/
 
     
-    _baseEevings = 1;
+    _baseEevings = 10;
     _eevings.clear();
     spawnEevee(_baseEevings);
 
