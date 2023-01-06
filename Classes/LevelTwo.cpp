@@ -22,7 +22,7 @@ bool LevelTwo::init()
     {
         return false;
     }
-
+     _currentLevel = 0;
     
     //powers inventory
     collisionType.clear();
@@ -33,8 +33,26 @@ bool LevelTwo::init()
     collisionType.push_back(2);
     collisionType.push_back(2);
 
+    plasma = Sprite::create("plasma.png");
+    plasma->setAnchorPoint(Vec2::ZERO);
+    plasma->setScale(0.10, 0.10);
+    plasma->setPosition(954, 480);
 
 
+
+    PhysicsBody* antennaP = PhysicsBody::createBox(Size(plasma->getContentSize().width / 2, plasma->getContentSize().height / 2),
+        PhysicsMaterial(0.0f, 0.0f, 0.0f));
+
+    antennaP->setGravityEnable(false);
+    antennaP->setDynamic(false);
+    antennaP->setTag(1);
+    antennaP->setContactTestBitmask(true);
+    antennaP->setCollisionBitmask(6);
+
+
+    plasma->setPhysicsBody(antennaP);
+
+    this->addChild(plasma, 3);
     _xSpawn = 835;
     _ySpawn = 1050;
 
@@ -42,13 +60,15 @@ bool LevelTwo::init()
 
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
+    
     createMap(_tilemap);
 
-    int inventory[5] = { 2, 2, 2, 2, 10};
+    int inventory[5] = { 2, 4, 4, 4, 10};
 
     createMenu(inventory);
 
     _baseEevings = 1;
+    _eevings.clear();
     spawnEevee(_baseEevings);
 
     EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();

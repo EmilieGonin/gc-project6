@@ -19,7 +19,10 @@ public:
 protected:
     TMXTiledMap* _tilemap;
     TMXLayer* _background;
+    
+
     TMXObjectGroup* _collision;
+    Sprite* plasma;
     void setPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; }
     cocos2d::PhysicsWorld* sceneWorld;
     //Sprite* _menuScreen;

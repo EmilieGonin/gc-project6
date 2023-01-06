@@ -30,7 +30,7 @@ bool TitleScreen::init()
         return false;
     }
   
-    //_myLevels.push_back(LevelOne::createScene());
+    
   
     this->start = Label::createWithTTF("Start", "fonts/Hansip.otf", 25);
     start->setTextColor(Color4B::WHITE);
@@ -67,11 +67,11 @@ void TitleScreen::MouseUp(Event* event) {
    
     if (startBounds.containsPoint(_mousePosition)) {
         cocos2d::log("menu touched %d" , _myLevels.size());
-        
-        auto director = Director::getInstance();
-        auto scene = LevelTwo::createScene();
 
-        director->replaceScene(scene);
+        auto director = Director::getInstance();
+
+
+        director->replaceScene(LevelOne::createScene());
     }
     if (quitBounds.containsPoint(_mousePosition)) {
    
