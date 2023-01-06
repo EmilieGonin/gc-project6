@@ -4,7 +4,7 @@ Scene* LevelTwo::createScene() {
     Scene* scene = LevelTwo::createWithPhysics();
     scene = LevelTwo::create();
     scene->getPhysicsWorld()->setGravity(Vect(0, -200));
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     return scene;
 }
 
@@ -22,9 +22,13 @@ bool LevelTwo::init()
     {
         return false;
     }
+
+    if (_eevings.size() != 0) {
+        _eevings.clear();
+    }
+
      _currentLevel = 0;
     
-    //powers inventory
     collisionType.clear();
     collisionType.push_back(2);
     collisionType.push_back(2);
@@ -38,8 +42,6 @@ bool LevelTwo::init()
     plasma->setScale(0.10, 0.10);
     plasma->setPosition(954, 480);
 
-
-
     PhysicsBody* antennaP = PhysicsBody::createBox(Size(plasma->getContentSize().width / 2, plasma->getContentSize().height / 2),
         PhysicsMaterial(0.0f, 0.0f, 0.0f));
 
@@ -48,26 +50,19 @@ bool LevelTwo::init()
     antennaP->setTag(1);
     antennaP->setContactTestBitmask(true);
     antennaP->setCollisionBitmask(6);
-
-
     plasma->setPhysicsBody(antennaP);
 
     this->addChild(plasma, 3);
     _xSpawn = 835;
     _ySpawn = 1050;
 
-
-
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
-    
     createMap(_tilemap);
-
     int inventory[5] = { 2, 4, 4, 4, 10};
-
     createMenu(inventory);
 
-    _baseEevings = 20;
+    _baseEevings = 1;
     _eevings.clear();
     spawnEevee(_baseEevings);
 
@@ -75,14 +70,6 @@ bool LevelTwo::init()
     contactListener->onContactBegin = CC_CALLBACK_1(Level::onContactBegin, this);
     contactListener->onContactSeparate = CC_CALLBACK_1(Level::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithFixedPriority(contactListener, 1);
-
-    Sprite* menu = Sprite::create("interface/interface.png");
-    menu->setScale(1, 1);
-    menu->setAnchorPoint(Vec2::ZERO);
-    menu->setPosition(0, 0);
-
-    
-    
 
     //MouseEvents
     EventListenerMouse* listener = EventListenerMouse::create();
@@ -93,8 +80,6 @@ bool LevelTwo::init()
 
     return true;
 }
-
-
 
 void LevelTwo::MouseUp(Event* event) {
     handleEvent(event);

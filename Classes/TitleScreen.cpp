@@ -1,9 +1,8 @@
 #include "TitleScreen.h"
 
+//Scenes
 #include "LevelOne.h"
 #include "LevelTwo.h"
-#include "functions.h"
-USING_NS_CC;
 
 Scene* TitleScreen::createScene()
 {
@@ -21,17 +20,13 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool TitleScreen::init()
 {
-    
-    
     //////////////////////////////
     // 1. super init first
     if (!Scene::init())
     {
         return false;
     }
-  
-    
-  
+
     this->start = Label::createWithTTF("Start", "fonts/Hansip.otf", 25);
     start->setTextColor(Color4B::WHITE);
     start->setPosition(100, 200);
@@ -40,9 +35,7 @@ bool TitleScreen::init()
     quit->setTextColor(Color4B::WHITE);
     quit->setPosition(100, 135);
   
-
     _menuScreen = Sprite::create("menuScreen.png");
-  
     _menuScreen->setAnchorPoint(Vec2(0,0));
     _menuScreen->setPosition(0, 0);
 
@@ -66,15 +59,10 @@ void TitleScreen::MouseUp(Event* event) {
     Rect quitBounds = this->quit->getBoundingBox();
    
     if (startBounds.containsPoint(_mousePosition)) {
-        cocos2d::log("menu touched %d" , _myLevels.size());
-
         auto director = Director::getInstance();
-
-
-        director->replaceScene(LevelOne::createScene());
+        director->replaceScene(LevelTwo::createScene());
     }
-    if (quitBounds.containsPoint(_mousePosition)) {
-   
+    else if (quitBounds.containsPoint(_mousePosition)) {
         auto director = Director::getInstance();
         director->end();
     }
