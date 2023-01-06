@@ -594,7 +594,7 @@ bool Level::onContactBegin(PhysicsContact& contact) {
         PhysicsBody* a = contact.getShapeA()->getBody();
         PhysicsBody* b = contact.getShapeB()->getBody();
 
-        if (!_eevings.empty() && _eevings[b->getTag()])
+        if (!_eevings.empty())
         {
             if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 2) || (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 1)) {
                 //  collide avec mur
