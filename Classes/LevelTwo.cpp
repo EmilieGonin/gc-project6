@@ -62,7 +62,7 @@ bool LevelTwo::init()
     int inventory[5] = { 2, 4, 4, 4, 10};
     createMenu(inventory);
 
-    _baseEevings = 1;
+    _baseEevings = 10;
     _eevings.clear();
     spawnEevee(_baseEevings);
 

@@ -46,7 +46,7 @@ bool LevelOne::init()
     int inventory[5] = { 2, 0 };
     createMenu(inventory);
 
-    _baseEevings = 10;
+    _baseEevings = 1;
     _eevings.clear();
     spawnEevee(_baseEevings);
 
