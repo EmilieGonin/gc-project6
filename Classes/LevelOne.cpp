@@ -43,10 +43,10 @@ bool LevelOne::init()
     auto _tilemap = TMXTiledMap::create("TuTo.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
-    int inventory[5] = { 2, 0 };
+    int inventory[5] = { 2, 0, 0, 0, 1 };
     createMenu(inventory);
 
-    _baseEevings = 1;
+    _baseEevings = 5;
     _eevings.clear();
     spawnEevee(_baseEevings);
 
