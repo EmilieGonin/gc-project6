@@ -5,16 +5,14 @@
 void Level::update(float delta) {
     if(this->_eevings.size())
     {
-        Eevee* eevee = this->_eevings[i];
-        eevee->update(delta, _speed);
-
-        if (_countdown && _countdown->getString() == "0") {
-            launchExplosion(i);
-        }
         for (size_t i = 0; i < this->_eevings.size(); i++)
         {
             Eevee* eevee = this->_eevings[i];
             eevee->update(delta, _speed);
+
+            if (_countdown && _countdown->getString() == "0") {
+                launchExplosion(i);
+            }
         }
     }
     else {
