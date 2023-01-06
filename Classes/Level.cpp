@@ -2,10 +2,13 @@
 
 
 void Level::update(float delta) {
-    for (size_t i = 0; i < this->_eevings.size(); i++)
+    if(this->_eevings.size())
     {
-        Eevee* eevee = this->_eevings[i];
-        eevee->update(delta, _speed);
+        for (size_t i = 0; i < this->_eevings.size(); i++)
+        {
+            Eevee* eevee = this->_eevings[i];
+            eevee->update(delta, _speed);
+        }
     }
 
 
@@ -527,7 +530,7 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
             Node* node = Node::create();
             PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
-            box->setCollisionBitmask(3);
+            box->setCollisionBitmask(4);
             box->setContactTestBitmask(true);
 
             node->setPhysicsBody(box);
@@ -550,26 +553,30 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
 bool Level::onContactBegin(PhysicsContact& contact) {
 
-
-    //("onContacftBegin %d %d", contact.getShapeA()->getBody()->getCollisionBitmask(), contact.getShapeB()->getBody()->getCollisionBitmask());
+    PhysicsBody* a = contact.getShapeA()->getBody();
+    PhysicsBody* b = contact.getShapeB()->getBody();
+    Eevee* myEevee = this->_eevings[b->getTag()];
+    //("onContacftBegin %d %d", a->getCollisionBitmask(), b->getCollisionBitmask());
 
     //log("my size %d", this->_eevings.size());
     //log("my ids %d %d", this->_eevings[0]->getId(), this->_eevings[1]->getId());
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 2) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 2 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+    if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 2) || (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 1)) {
 
         //  collide avec mur
-        log("je collide avec wall %d ", this->_eevings[contact.getShapeB()->getBody()->getTag()]->getPas());
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->collide();
+        log("je collide avec wall %d ", myEevee->getPas());
+        myEevee->collide();
     }
 
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+    else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 3) || (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1)) {
         //pour relancer la marche après une chute
         log("je collide avec sol");
-            this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
+        myEevee->setPas(myEevee->getFormerPas());
 
-
-            this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-                        return true;
+        if (myEevee->getSkill() == 5)
+        {
+            myEevee->setSkill(0);
+        }
+        return true;
 
 
     }
@@ -577,28 +584,29 @@ bool Level::onContactBegin(PhysicsContact& contact) {
 
     //EEVEE POWERS
 
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 4) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 4 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+    else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 4) || (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 1)) {
 
-        if (this->_eevings[contact.getShapeB()->getBody()->getTag()]->getSkill() == 3) {
+        if (myEevee->getSkill() == 2) {
             return true;
-       }
+        }
         else {
             log("die");
-            // die this->_eevings[contact.getShapeB()->getBody()->getTag()]->kill();
+            kill(b->getTag());
         }
     }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 5) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 5 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
 
-        if (this->_eevings[contact.getShapeB()->getBody()->getTag()]->getSkill() == 3) {
-            
-            Vec2 myPosition = this->_eevings[contact.getShapeB()->getBody()->getTag()]->getSprite()->getPosition();
+    else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 5) || (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 1)) {
 
-            this->_eevings[contact.getShapeB()->getBody()->getTag()]->getSprite()->setPosition(myPosition);
+        if (myEevee->getSkill() == 4) {
 
-            contact.getShapeA()->getBody()->setCollisionBitmask(3);
-            contact.getShapeA()->getBody()->setGroup(5);
+            Vec2 myPosition = myEevee->getSprite()->getPosition();
 
-        
+            myEevee->getSprite()->setPosition(myPosition);
+
+            a->setCollisionBitmask(3);
+            a->setGroup(5);
+
+
         }
         else {
             return false;
@@ -606,25 +614,22 @@ bool Level::onContactBegin(PhysicsContact& contact) {
         // if eevee glaceon -> enable collision
     }
 
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 6) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 6 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+    else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 6) || (a->getCollisionBitmask() == 6 && b->getCollisionBitmask() == 1)) {
 
         //  collide avec lever volteon
         // if eevee == volteon -> activate lever
     }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 7) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 7 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+    else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7) || (a->getCollisionBitmask() == 7 && b->getCollisionBitmask() == 1)) {
 
         //  collide avec door 
         //code pour detruire eevee et pour augmenter _savedEevings
     }
 
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 8) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 8 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
+    else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 8) || (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 1)) {
 
-        //kill()
+        kill(b->getTag());
     }
-
-
-
-    if (contact.getShapeA()->getBody()->getCollisionBitmask() == contact.getShapeB()->getBody()->getCollisionBitmask()) {
+    else if (a->getCollisionBitmask() == b->getCollisionBitmask()) {
         //pour transpercer
         return false;
     }
@@ -632,29 +637,33 @@ bool Level::onContactBegin(PhysicsContact& contact) {
 }
 
 
+
 bool Level::onContactSeparate(PhysicsContact& contact) {
+
+    PhysicsBody* a = contact.getShapeA()->getBody();
+    PhysicsBody* b = contact.getShapeB()->getBody();
+  
    // log("onContactSeparate %d %d", contact.getShapeA()->getGroup(), contact.getShapeB()->getGroup());
+    if(this->_eevings.size())
+    {
+        Eevee* myEevee = this->_eevings[b->getTag()];
+        if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 4) || (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 1)) {
+            log("je reset skill 1");
+            myEevee->setSkill(0);
+        }
 
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 4) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 4 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 5) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 5 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getGroup() == 5) || (contact.getShapeA()->getBody()->getGroup() == 5 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 6) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 6 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
-    }
-    if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 7) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 7 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-
-        this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
+        else if ((a->getCollisionBitmask() == 1 && b->getGroup() == 5) || (a->getGroup() == 5 && b->getCollisionBitmask() == 1)) {
+            log("je reset skill 2");
+            myEevee->setSkill(0);
+        }
+        else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 6) || (a->getCollisionBitmask() == 6 && b->getCollisionBitmask() == 1)) {
+            log("je reset skill 3");
+            myEevee->setSkill(0);
+        }
+        else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7) || (a->getCollisionBitmask() == 7 && b->getCollisionBitmask() == 1)) {
+            log("je reset skill 4");
+            myEevee->setSkill(0);
+        }
     }
 
     return true;
