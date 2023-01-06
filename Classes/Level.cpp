@@ -51,8 +51,10 @@ void Level::handleEvent(Event* event) {
                     Label* counter = Label::createWithTTF(std::to_string(_powersInventory[_skillSelected - 1]), "fonts/Hansip.otf", 25);
                     _powers[_skillSelected - 1]->addChild(counter);
                     if (_skillSelected == 5) {
-                        JumpTo* jump = JumpTo::create(3, Point(100, 30), 96, 1);
-                        eevee->getSprite()->runAction(jump);
+                        
+                        /*JumpBy* jump = JumpBy::create(0.5, Point(-200 * eevee->getPas(), 0), 50, 1);
+                        eevee->getSprite()->runAction(jump);*/
+                        eevee->getSprite()->getPhysicsBody()->applyImpulse( Vect(-50 * eevee->getPas(), 200) );
                     }
                     _skillSelected = 0;
                 }
@@ -563,6 +565,8 @@ bool Level::onContactBegin(PhysicsContact& contact) {
         //pour relancer la marche après une chute
      
             this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
+
+            this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
         
     }
 
