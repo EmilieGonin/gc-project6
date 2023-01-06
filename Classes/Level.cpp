@@ -60,6 +60,9 @@ void Level::handleEvent(Event* event) {
                     cocos2d::log("power not available");
                 }
             }
+            else if (isTouched(eevee->getSprite())) {
+                kill(i);
+            }
         }
     }
 
@@ -92,6 +95,18 @@ void Level::decreaseSpeed() {
     if (_speed != 50) {
         _speed = _speed - 250;
     }
+}
+
+void Level::kill(int eeveeId) {
+    Eevee* eevee = _eevings[eeveeId];
+    Sprite* sprite = eevee->getSprite();
+    ParticleFlower* particle = ParticleFlower::create();
+    particle->setPosition(sprite->getPosition());
+    particle->setDuration(0.1);
+    _eevings.erase(_eevings.begin() + eeveeId);
+    this->addChild(particle);
+    this->removeChild(sprite);
+    delete eevee;
 }
 
 void Level::spawnEevee(int number) {
