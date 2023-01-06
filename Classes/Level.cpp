@@ -594,17 +594,16 @@ bool Level::onContactBegin(PhysicsContact& contact) {
         PhysicsBody* a = contact.getShapeA()->getBody();
         PhysicsBody* b = contact.getShapeB()->getBody();
 
-        if (this->_eevings.size() == _baseEevings - _killedEevings - _savedEevings)
+        if (_eevings.size() && _eevings[b->getTag()])
         {
             if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 2) || (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 1)) {
                 //  collide avec mur
                 log("je collide avec wall %d ", _eevings[b->getTag()]->getPas());
-                this->_eevings[b->getTag()]->collide();
+                _eevings[b->getTag()]->collide();
             }
 
             else if ((a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 3) || (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1)) {
                 //pour relancer la marche après une chute
-                log("je collide avec sol %d ", _eevings[b->getTag()]);
                 if (_eevings[b->getTag()]->getFormerPas() == 0) {
                     _eevings[b->getTag()]->setPas(1);
                 }
