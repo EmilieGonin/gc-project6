@@ -27,6 +27,7 @@ protected:
 	int _speed = 50;
 	int _skillSelected;
 	Vec2 _mousePosition;
+	Label* _countdown;
 
 public:
 
@@ -41,6 +42,7 @@ public:
 	void getAllLevels();
 	bool isTouched(Sprite*);
 	void kill(int);
+	void launchExplosion(int);
 	//void MouseUp(cocos2d::Event* event);
 
 	//Setters

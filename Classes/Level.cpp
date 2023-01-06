@@ -6,6 +6,10 @@ void Level::update(float delta) {
     {
         Eevee* eevee = this->_eevings[i];
         eevee->update(delta, _speed);
+
+        if (_countdown && _countdown->getString() == "0") {
+            launchExplosion(i);
+        }
     }
 
 
@@ -51,7 +55,10 @@ void Level::handleEvent(Event* event) {
                     _powers[_skillSelected - 1]->removeAllChildren();
                     Label* counter = Label::createWithTTF(std::to_string(_powersInventory[_skillSelected - 1]), "fonts/Hansip.otf", 25);
                     _powers[_skillSelected - 1]->addChild(counter);
-                    if (_skillSelected == 5) {
+                    if (_skillSelected == 1) { //Flareon
+                        _countdown = eevee->explosion(i);
+                    }
+                    else if (_skillSelected == 5) { //Leafeon
                         
                         /*JumpBy* jump = JumpBy::create(0.5, Point(-200 * eevee->getPas(), 0), 50, 1);
                         eevee->getSprite()->runAction(jump);*/
@@ -110,6 +117,36 @@ void Level::kill(int eeveeId) {
     this->addChild(particle);
     this->removeChild(sprite);
     delete eevee;
+}
+
+void Level::launchExplosion(int eeveeId) {
+    Sprite* sprite = _eevings[eeveeId]->getSprite();
+
+    /*PhysicsBody* physicsBody = PhysicsBody::createBox(Size(eeveeSprite->getContentSize().width / 2, eeveeSprite->getContentSize().height / 2),
+        PhysicsMaterial(0.0f, 0.0f, 0.0f));*/
+
+    ParticleExplosion* explosion = ParticleExplosion::create();
+    explosion->setPosition(sprite->getPosition());
+    explosion->setDuration(0.1);
+    //explosion->setSpeed(50);
+    //explosion->setContentSize(sprite->getContentSize() * 2);
+    this->addChild(explosion);
+    Rect explosionBounds = explosion->getBoundingBox();
+
+    //Size radius = sprite->getContentSize().width / 2, eeveeSprite->getContentSize().height / 2)
+
+    //Rect bounds = sprite->getBoundingBox();
+    //Rect bigBounds = Rect(sprite->getPosition(), bounds.size * 2);
+
+    /*ParticleFire* fire = nullptr;
+    for (size_t i = 0; i < 1; i++)
+    {
+        fire = ParticleFire::create();
+        fire->setDuration(0.1);
+        this->addChild(fire);
+    }*/
+
+    kill(eeveeId);
 }
 
 void Level::spawnEevee(int number) {

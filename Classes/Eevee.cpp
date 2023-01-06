@@ -33,7 +33,6 @@ Vector<SpriteFrame*> Eevee::getAnimation(const char* format, int count)
 }
 
 void Eevee::move() {
-
     this->_sprite->runAction(RepeatForever::create(this->_animate));
 }
 
@@ -74,6 +73,22 @@ void Eevee::useSkill(int skill) {
     //
 }
 
+Label* Eevee::explosion(int eeveeId) {
+    Label* countdown = Label::createWithTTF("5", "fonts/Hansip.otf", 22);
+    countdown->setPosition(10, 30);
+    countdown->setTag(1);
+    DelayTime* delay = DelayTime::create(1);
+    RemoveSelf* remove = RemoveSelf::create();
+    CallFunc* callback = CallFunc::create([countdown]() {
+        int count = atoi((countdown->getString()).c_str()) - 1;
+    countdown->setString(std::to_string(count));
+        });
+    Sequence* sequence = Sequence::create(delay, callback, delay, callback, delay, callback, delay, callback, delay, callback, nullptr);
+    _sprite->addChild(countdown);
+    countdown->runAction(sequence);
+    return countdown;
+}
+
 bool Eevee::isTouched(Vec2 position) {
     Rect eeveeBounds = _sprite->getBoundingBox();
 
@@ -101,7 +116,6 @@ void Eevee::collide() {
                 _pas *= -1;
                 _formerPas = _pas;
             }
-
 }
 
 //Getters
