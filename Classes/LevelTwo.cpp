@@ -34,15 +34,15 @@ bool LevelTwo::init()
     collisionType.push_back(2);
 
 
-    _xSpawn = 400;
-    _ySpawn = 1000;
+    _xSpawn = 1750;
+    _ySpawn = 1050;
 
 
 
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
-    int inventory[5] = { 2, 0 };
+    int inventory[5] = { 2, 2,2,2,2 };
     createMenu(inventory);
 
     _baseEevings = 1;
@@ -50,7 +50,7 @@ bool LevelTwo::init()
 
     EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(Level::onContactBegin, this);
-    //contactListener->onContactSeparate = CC_CALLBACK_1(Level::onContactSeparate, this);
+    contactListener->onContactSeparate = CC_CALLBACK_1(Level::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithFixedPriority(contactListener, 1);
 
     Sprite* menu = Sprite::create("interface/interface.png");

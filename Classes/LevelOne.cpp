@@ -62,7 +62,7 @@ bool LevelOne::init()
 
     EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(LevelOne::onContactBegin, this);
-    //contactListener->onContactSeparate = CC_CALLBACK_1(LevelOne::onContactSeparate, this);
+    contactListener->onContactSeparate = CC_CALLBACK_1(LevelOne::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithFixedPriority(contactListener, 1);
     
     
