@@ -31,14 +31,13 @@ protected:
 	int _skillSelected;
 	Vec2 _mousePosition;
 	Label* _countdown;
+	std::vector<TMXLayer*> _barrels;
+	std::vector<Node*> _barrelsNode;
 
 public:
 
 	bool onContactBegin(PhysicsContact&);
 	bool onContactSeparate(PhysicsContact&);
-
-	std::vector<TMXLayer*> barrels;
-	std::vector<Node*> myBarrelsNode;
 
 	std::vector<TMXLayer*> freezes;
 	std::vector<TMXLayer*> electricalDoors;

@@ -10,7 +10,7 @@ void Level::update(float delta) {
             Eevee* eevee = this->_eevings[i];
             eevee->update(delta, _speed);
 
-            if (_countdown && _countdown->getString() == "0") {
+            if (eevee->getSkill() == 1 && _countdown->getString() == "0") {
                 launchExplosion(i);
             }
         }
@@ -151,29 +151,42 @@ void Level::saved(int eeveeId) {
 void Level::launchExplosion(int eeveeId) {
     Sprite* sprite = _eevings[eeveeId]->getSprite();
 
-    /*PhysicsBody* physicsBody = PhysicsBody::createBox(Size(eeveeSprite->getContentSize().width / 2, eeveeSprite->getContentSize().height / 2),
-        PhysicsMaterial(0.0f, 0.0f, 0.0f));*/
+    Node* node = Node::create();
+    node->setPosition(sprite->getPosition());
+    node->setContentSize(sprite->getContentSize() * 2);
+    Rect nodeBounds = node->getBoundingBox();
+    log("bounds :");
+    log("%d", sprite->getContentSize().width);
 
     ParticleExplosion* explosion = ParticleExplosion::create();
     explosion->setPosition(sprite->getPosition());
     explosion->setDuration(0.1);
+    explosion->setColor(Color3B::RED);
     //explosion->setSpeed(50);
     //explosion->setContentSize(sprite->getContentSize() * 2);
     this->addChild(explosion);
     Rect explosionBounds = explosion->getBoundingBox();
 
+    ParticleFire* fire = nullptr;
+
+    for (size_t i = 0; i < _barrels.size(); i++)
+    {
+        if (nodeBounds.intersectsRect(_barrelsNode[i]->getBoundingBox())) {
+            log("intersects");
+            fire = ParticleFire::create();
+            fire->setDuration(0.1);
+            fire->setPosition(_barrelsNode[i]->getPosition());
+            this->addChild(fire);
+        }
+        else {
+            log("nope");
+        }
+    }
+
     //Size radius = sprite->getContentSize().width / 2, eeveeSprite->getContentSize().height / 2)
 
     //Rect bounds = sprite->getBoundingBox();
     //Rect bigBounds = Rect(sprite->getPosition(), bounds.size * 2);
-
-    /*ParticleFire* fire = nullptr;
-    for (size_t i = 0; i < 1; i++)
-    {
-        fire = ParticleFire::create();
-        fire->setDuration(0.1);
-        this->addChild(fire);
-    }*/
 
     kill(eeveeId);
 }
@@ -339,20 +352,14 @@ void Level::createMap(TMXTiledMap* tilemap) {
 
         Node* node = Node::create();
 
-
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        barrels.push_back(tilemap->getLayer("BARREL_1"));
-        myBarrelsNode.push_back(node);
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
         box->setContactTestBitmask(true);
         box->setCollisionBitmask(collisionType[0]);
        
 
         node->setPhysicsBody(box);
+        _barrels.push_back(tilemap->getLayer("BARREL_1"));
+        _barrelsNode.push_back(node);
 
         //box->setGroup(-1);
 
@@ -372,11 +379,14 @@ void Level::createMap(TMXTiledMap* tilemap) {
         cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR2.asValueMap();
 
         Node* node = Node::create();
+
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
         box->setCollisionBitmask(collisionType[1]);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
+        _barrels.push_back(tilemap->getLayer("BARREL_2"));
+        _barrelsNode.push_back(node);
 
         //box->setGroup(-1);
 
@@ -396,11 +406,14 @@ void Level::createMap(TMXTiledMap* tilemap) {
         cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR3.asValueMap();
 
         Node* node = Node::create();
+
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
         box->setCollisionBitmask(collisionType[2]);
         box->setContactTestBitmask(true);
      
         node->setPhysicsBody(box);
+        _barrels.push_back(tilemap->getLayer("BARREL_3"));
+        _barrelsNode.push_back(node);
 
         //box->setGroup(-1);
 
@@ -420,11 +433,14 @@ void Level::createMap(TMXTiledMap* tilemap) {
         cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR4.asValueMap();
 
         Node* node = Node::create();
+
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
         box->setCollisionBitmask(collisionType[3]);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
+        _barrels.push_back(tilemap->getLayer("BARREL_4"));
+        _barrelsNode.push_back(node);
 
         //box->setGroup(-1);
 
@@ -444,11 +460,14 @@ void Level::createMap(TMXTiledMap* tilemap) {
         cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR5.asValueMap();
 
         Node* node = Node::create();
+
         PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
         box->setCollisionBitmask(collisionType[4]);
         box->setContactTestBitmask(true);
 
         node->setPhysicsBody(box);
+        _barrels.push_back(tilemap->getLayer("BARREL_5"));
+        _barrelsNode.push_back(node);
             //box->setGroup(-1);
 
 
@@ -469,11 +488,14 @@ void Level::createMap(TMXTiledMap* tilemap) {
             cocos2d::ValueMap rectangle_box_properties = rectangle_box_BAR6.asValueMap();
 
             Node* node = Node::create();
+
             PhysicsBody* box = PhysicsBody::createEdgeBox(Size(rectangle_box_properties["width"].asInt(), rectangle_box_properties["height"].asInt()));
             box->setCollisionBitmask(collisionType[5]);
             box->setContactTestBitmask(true);
 
             node->setPhysicsBody(box);
+            _barrels.push_back(tilemap->getLayer("BARREL_6"));
+            _barrelsNode.push_back(node);
 
             //box->setGroup(-1);
 
