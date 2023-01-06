@@ -60,7 +60,7 @@ void TitleScreen::MouseUp(Event* event) {
    
     if (startBounds.containsPoint(_mousePosition)) {
         auto director = Director::getInstance();
-        director->replaceScene(LevelTwo::createScene());
+        director->replaceScene(LevelOne::createScene());
     }
     else if (quitBounds.containsPoint(_mousePosition)) {
         auto director = Director::getInstance();
