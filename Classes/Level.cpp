@@ -51,12 +51,20 @@ void Level::handleEvent(Event* event) {
                     _powers[_skillSelected - 1]->removeAllChildren();
                     Label* counter = Label::createWithTTF(std::to_string(_powersInventory[_skillSelected - 1]), "fonts/Hansip.otf", 25);
                     _powers[_skillSelected - 1]->addChild(counter);
-
+                    if (_skillSelected == 5) {
+                        
+                        /*JumpBy* jump = JumpBy::create(0.5, Point(-200 * eevee->getPas(), 0), 50, 1);
+                        eevee->getSprite()->runAction(jump);*/
+                        eevee->getSprite()->getPhysicsBody()->applyImpulse( Vect(-50 * eevee->getPas(), 200) );
+                    }
                     _skillSelected = 0;
                 }
                 else {
                     cocos2d::log("power not available");
                 }
+            }
+            else if (isTouched(eevee->getSprite())) {
+                kill(i);
             }
         }
     }
@@ -90,6 +98,18 @@ void Level::decreaseSpeed() {
     if (_speed != 50) {
         _speed = _speed - 250;
     }
+}
+
+void Level::kill(int eeveeId) {
+    Eevee* eevee = _eevings[eeveeId];
+    Sprite* sprite = eevee->getSprite();
+    ParticleFlower* particle = ParticleFlower::create();
+    particle->setPosition(sprite->getPosition());
+    particle->setDuration(0.1);
+    _eevings.erase(_eevings.begin() + eeveeId);
+    this->addChild(particle);
+    this->removeChild(sprite);
+    delete eevee;
 }
 
 void Level::spawnEevee(int number) {
@@ -147,7 +167,7 @@ void Level::spawnEevee(int number) {
 void Level::createMenu(int powers[]) {
 
     std::string path = "interface/";
-    std::string myPowers[5] = { "pyro","feuille","givre","aqua","volt" };
+    std::string myPowers[5] = { "pyro","aqua","volt","givre","feuille" };
 
 
     Sprite* menu = Sprite::create("interface/interface.png");
@@ -543,10 +563,15 @@ bool Level::onContactBegin(PhysicsContact& contact) {
     }
 
     if ((contact.getShapeA()->getBody()->getCollisionBitmask() == 1 && contact.getShapeB()->getBody()->getCollisionBitmask() == 3) || (contact.getShapeA()->getBody()->getCollisionBitmask() == 3 && contact.getShapeB()->getBody()->getCollisionBitmask() == 1)) {
-        //pour relancer la marche après une chute
+        //pour relancer la marche aprÃ¨s une chute
         log("je collide avec sol");
             this->_eevings[contact.getShapeB()->getBody()->getTag()]->setPas(this->_eevings[contact.getShapeB()->getBody()->getTag()]->getFormerPas());
-            return true;
+
+
+            this->_eevings[contact.getShapeB()->getBody()->getTag()]->setSkill(0);
+                        return true;
+
+
     }
 
 

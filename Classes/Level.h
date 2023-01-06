@@ -40,6 +40,7 @@ public:
 	void createMenu(int[]);
 	void getAllLevels();
 	bool isTouched(Sprite*);
+	void kill(int);
 	//void MouseUp(cocos2d::Event* event);
 
 	//Setters

@@ -34,7 +34,8 @@ bool LevelTwo::init()
     collisionType.push_back(2);
 
 
-    _xSpawn = 1750;
+
+    _xSpawn = 835;
     _ySpawn = 1050;
 
 
@@ -42,7 +43,9 @@ bool LevelTwo::init()
     auto _tilemap = TMXTiledMap::create("EevingsMap1.tmx");
     this->addChild(_tilemap);
     createMap(_tilemap);
-    int inventory[5] = { 2, 2,2,2,2 };
+
+    int inventory[5] = { 2, 2, 2, 2, 10};
+
     createMenu(inventory);
 
     _baseEevings = 1;
@@ -57,6 +60,9 @@ bool LevelTwo::init()
     menu->setScale(1, 1);
     menu->setAnchorPoint(Vec2::ZERO);
     menu->setPosition(0, 0);
+
+    
+    
 
     //MouseEvents
     EventListenerMouse* listener = EventListenerMouse::create();
