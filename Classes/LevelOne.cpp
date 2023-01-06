@@ -1,13 +1,10 @@
 #include "LevelOne.h"
-#include "functions.h"
-USING_NS_CC;
 
 Scene* LevelOne::createScene() {
     Scene* scene = LevelOne::createWithPhysics();
     scene = LevelOne::create();
     scene->getPhysicsWorld()->setGravity(Vect(0, -750));
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-    
+    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     return scene;
 }
 
@@ -21,7 +18,6 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool LevelOne::init()
 {
-
     _currentLevel = 0;
     //////////////////////////////
     // 1. super init first
@@ -29,14 +25,17 @@ bool LevelOne::init()
     {
         return false;
     }
+
+    if (_eevings.size() != 0) {
+        _eevings.clear();
+    }
+
     collisionType.clear();
     collisionType.push_back(3);
     collisionType.push_back(3);
     collisionType.push_back(3);
     collisionType.push_back(3);
     collisionType.push_back(2);
-
-
 
     _xSpawn = 550;
     _ySpawn = 950;
@@ -47,16 +46,6 @@ bool LevelOne::init()
     int inventory[5] = { 2, 0 };
     createMenu(inventory);
 
-    /*_tilemap = new TMXTiledMap();
-    _tilemap->initWithTMXFile("Map1.tmx");
-    _background = _tilemap->getLayer("background");
-    _collidable = _tilemap->getLayer("collidable");
-    _collidable->setVisible(false);
-    _collision = _tilemap->getObjectGroup("collision");
-    
-    this->addChild(_tilemap);*/
-
-    
     _baseEevings = 10;
     _eevings.clear();
     spawnEevee(_baseEevings);
@@ -66,8 +55,6 @@ bool LevelOne::init()
     contactListener->onContactSeparate = CC_CALLBACK_1(LevelOne::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithFixedPriority(contactListener, 1);
     
-    
-
     //MouseEvents
     EventListenerMouse* listener = EventListenerMouse::create();
     listener->onMouseUp = CC_CALLBACK_1(LevelOne::MouseUp, this);
@@ -77,9 +64,6 @@ bool LevelOne::init()
 
     return true;    
 }
-
-
-
 
 void LevelOne::MouseUp(Event* event) {
     handleEvent(event);

@@ -1,6 +1,6 @@
 #pragma once
-
 #include "Level.h"
+USING_NS_CC;
 
 class TitleScreen : public Level
 {
@@ -11,7 +11,6 @@ public:
     void MouseUp(cocos2d::Event* event);
     
 protected:
-
     Label* start;
     Label* quit;
     Sprite* _menuScreen;

@@ -1,24 +1,20 @@
 #include "WinScreen.h"
+
+//Scenes
 #include "LevelOne.h"
 #include "LevelTwo.h"
 #include "functions.h"
-USING_NS_CC;
-
 
 int savedEeveings, baseEevings, currentLevel;
 
 Scene* WinScreen::createScene(int savedEevingss, int BaseEevingss)
 {
    savedEeveings = savedEevingss;
-    baseEevings = BaseEevingss;
+   baseEevings = BaseEevingss;
 
-    Scene* scene = WinScreen::create();
-    return scene;
+   Scene* scene = WinScreen::create();
+   return scene;
 }
-
-
-
-
 
 // Print useful error message instead of segfaulting when files are not there.
 static void problemLoading(const char* filename)
@@ -30,17 +26,16 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool WinScreen::init()
 {
-   
     //////////////////////////////
     // 1. super init first
     if (!Scene::init())
     {
         return false;
     }
+
     log("%d", this->_savedEevings);
    
     _menuScreen = Sprite::create("winScreen.png");
-   
     _menuScreen->setAnchorPoint(Vec2::ZERO);
     _menuScreen->setPosition(0, 0);
     
@@ -53,7 +48,6 @@ bool WinScreen::init()
     _restart->setAnchorPoint(Vec2::ZERO);
     _restart->setScale(0.45,0.45);
     _restart->setPosition(650, 110);
-
 
     Label * savedEevingsText = Label::createWithTTF("Eevings saved : x "+ std::to_string(savedEeveings), "fonts/Hansip.otf", 25);
     savedEevingsText->setTextColor(Color4B::WHITE);
@@ -76,9 +70,7 @@ bool WinScreen::init()
     this->addChild(_next, 0);
     this->addChild(_restart, 0);
 
-
     return true;
-
 }
 
 void WinScreen::MouseUp(Event* event) {
@@ -90,18 +82,14 @@ void WinScreen::MouseUp(Event* event) {
     Rect nextBounds = _next->getBoundingBox();
     Rect restartBounds = _restart->getBoundingBox();
  
-
     if (nextBounds.containsPoint(mousePosition)) {
         cocos2d::log("menu touched");
-       
-
         auto director = Director::getInstance();
         auto scene = LevelTwo::createScene();
         director->replaceScene(scene);
     }
-    if (restartBounds.containsPoint(mousePosition)) {
+    else if (restartBounds.containsPoint(mousePosition)) {
         cocos2d::log("menu touched");
-
         auto director = Director::getInstance();
         auto scene = LevelOne::createScene();
         director->replaceScene(scene);
