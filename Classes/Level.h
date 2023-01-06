@@ -12,7 +12,10 @@ USING_NS_CC;
 class Level : public cocos2d::Scene
 {
 protected:
-	int _savedEevings, _baseEevings, _xSpawn, _ySpawn;
+	int _xSpawn, _ySpawn;
+	int _baseEevings = 0;
+	int  _savedEevings = 0;
+	int  _killedEevings = 0;
 	int _currentLevel = 0;
 	std::vector<Eevee*> _eevings;
 	std::vector<Label*> _labels;
@@ -34,6 +37,14 @@ public:
 	bool onContactBegin(PhysicsContact&);
 	bool onContactSeparate(PhysicsContact&);
 
+	std::vector<TMXLayer*> barrels;
+	std::vector<Node*> myBarrelsNode;
+
+	std::vector<TMXLayer*> freezes;
+	std::vector<TMXLayer*> electricalDoors;
+	std::vector<PhysicsBody*> electricalDoorsBod;
+
+
 	void createMap(TMXTiledMap* tilemap);
 	void update(float) override;
 	void handleEvent(Event*);
@@ -43,6 +54,7 @@ public:
 	bool isTouched(Sprite*);
 	void kill(int);
 	void launchExplosion(int);
+	void saved(int);
 	//void MouseUp(cocos2d::Event* event);
 
 	//Setters

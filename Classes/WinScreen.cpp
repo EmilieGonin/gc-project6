@@ -1,14 +1,17 @@
 #include "WinScreen.h"
 #include "LevelOne.h"
+#include "LevelTwo.h"
 #include "functions.h"
 USING_NS_CC;
 
 
+int savedEeveings, baseEevings, currentLevel;
 
-
-Scene* WinScreen::createScene()
+Scene* WinScreen::createScene(int savedEevingss, int BaseEevingss)
 {
- 
+   savedEeveings = savedEevingss;
+    baseEevings = BaseEevingss;
+
     Scene* scene = WinScreen::create();
     return scene;
 }
@@ -52,12 +55,12 @@ bool WinScreen::init()
     _restart->setPosition(650, 110);
 
 
-    Label * savedEevingsText = Label::createWithTTF("Eevings saved : x" +  _savedEevings, "fonts/Hansip.otf", 25);
+    Label * savedEevingsText = Label::createWithTTF("Eevings saved : x "+ std::to_string(savedEeveings), "fonts/Hansip.otf", 25);
     savedEevingsText->setTextColor(Color4B::WHITE);
     savedEevingsText->setPosition(770, 700);
     savedEevingsText->setScale(2, 2);
 
-    Label * deadEevingsText = Label::createWithTTF("Poor dead Eevings : x" + _baseEevings - _savedEevings, "fonts/Hansip.otf", 25);
+    Label * deadEevingsText = Label::createWithTTF("Poor dead Eevings : x" + std::to_string(baseEevings - savedEeveings), "fonts/Hansip.otf", 25);
     deadEevingsText->setTextColor(Color4B::WHITE);
     deadEevingsText->setPosition(830, 550);
     deadEevingsText->setScale(2, 2);
@@ -84,12 +87,23 @@ void WinScreen::MouseUp(Event* event) {
 
     Vec2 mousePosition = e->getLocationInView();
     Rect menuBounds = _menuScreen->getBoundingBox();
+    Rect nextBounds = _next->getBoundingBox();
+    Rect restartBounds = _restart->getBoundingBox();
  
 
-    if (menuBounds.containsPoint(mousePosition)) {
+    if (nextBounds.containsPoint(mousePosition)) {
         cocos2d::log("menu touched");
+       
+
         auto director = Director::getInstance();
-        /*auto scene = WinScreen::createScene(1,1);
-        director->replaceScene(scene);*/
+        auto scene = LevelTwo::createScene();
+        director->replaceScene(scene);
+    }
+    if (restartBounds.containsPoint(mousePosition)) {
+        cocos2d::log("menu touched");
+
+        auto director = Director::getInstance();
+        auto scene = LevelOne::createScene();
+        director->replaceScene(scene);
     }
 }
